@@ -3,4 +3,45 @@
   height: 50px;
   display: flex;
   justify-content: flex-end;
+}
+.launch-page .tabs {
+  display: flex;
+  flex-direction: row;
+}
+.launch-page .tabs .tab {
+  background-color: #aeaeae;
+  text-align: center;
+  padding: 20px 50px;
+}
+.launch-page .tabs .active-tab {
+  background-color: #d9d9d9;
+}
+.launch-page .contents .content {
+  display: none;
+}
+.launch-page .contents .active-content {
+  background-color: #d9d9d9;
+  display: block;
+  padding: 20px;
+}
+
+.container {
+  margin-top: 50px;
+  text-align: center;
+}
+.container .image-grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-auto-rows: minmax(50px, auto);
+}
+.container .image-grid .image-item:nth-child(5n) {
+  grid-column-end: span 2;
+}
+.container .image-grid img {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
 }/*# sourceMappingURL=LaunchPage.css.map */
