@@ -4,7 +4,8 @@ import { useNavigate } from "react-router-dom";
 import "./style/LaunchPage.css";
 import { auth, db, logout } from "../utils/firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import CardPage from "./CardPage"
+import CardPage from "./CardPage";
+import CustomCard from "./CustomCard";
 
 function LaunchPage() {
   const [index, setIndex] = useState(0);
@@ -46,7 +47,7 @@ function LaunchPage() {
         <div
           className={`${index === 0 ? "content active-content" : "content"}`}
         >
-          <CardPage/>
+          <CardPage className="card-page"/>
         </div>
         <div
           className={`${index === 1 ? "content active-content" : "content"}`}

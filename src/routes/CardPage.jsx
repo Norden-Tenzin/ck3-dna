@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import axios from "axios";
-import "./style/LaunchPage.css";
+import CustomCard from "./CustomCard";
 
 export default function CardPage() {
   const [images, setImages] = React.useState([]);
@@ -30,7 +30,7 @@ export default function CardPage() {
   );
 
   return (
-    <div className="container">
+    <div className="card-page">
       <InfiniteScroll
         dataLength={images}
         next={() => fetchImages(5)}
@@ -42,10 +42,10 @@ export default function CardPage() {
           />
         }
       >
-        <div className="image-grid" style={{ marginTop: "30px" }}>
+        <div className="card-grid">
           {loaded
             ? images.map((image, index) => (
-                <UnsplashImage url={image.urls.regular} key={index} />
+                <CustomCard url={image.urls.regular} />
               ))
             : ""}
         </div>
@@ -53,3 +53,8 @@ export default function CardPage() {
     </div>
   );
 }
+// {loaded
+//   ? images.map((image, index) => (
+//       <UnsplashImage url={image.urls.regular} key={index} />
+//     ))
+//   : ""}

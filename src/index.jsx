@@ -10,6 +10,7 @@ import Register from './routes/Register';
 import Reset from './routes/Reset';
 import Dashboard from './routes/Dashboard';
 import LaunchPage from './routes/LaunchPage';
+import CharacterPage from './routes/CharacterPage';
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/launch",
     element: <LaunchPage />,
+  },
+  {
+    path: "/chara",
+    element: <CharacterPage />,
   },
 ]);
 
