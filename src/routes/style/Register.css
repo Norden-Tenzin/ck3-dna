@@ -1,33 +1,74 @@
-.register {
-  height: 100vh;
-  width: 100vw;
+.register-page {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 }
-.register .container {
+.register-page .register-space {
+  border-radius: 1rem 0 0 1rem;
+  align-self: stretch;
+  width: 40%;
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.register-page .register-space .register-container {
+  width: 60%;
   display: flex;
   flex-direction: column;
-  text-align: center;
-  background-color: #dcdcdc;
-  padding: 30px;
+  justify-content: stretch;
 }
-.register .textBox {
+.register-page .register-space .register-container .register-title-container {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 4rem;
+}
+.register-page .register-space .register-container .register-title-container .title {
+  font-size: 3rem;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+.register-page .register-space .register-container .register-title-container .google-button {
+  background-color: white;
+  border: 2px solid lightgray;
+  border-radius: 10px;
+  color: black;
+  align-self: stretch;
+  padding: 10px;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+.register-page .register-space .register-container .register-title-container .google-button .google-button-icon {
+  height: 1.2rem;
+  position: absolute;
+  left: 5%;
+}
+.register-page .register-space .register-container .register-or {
+  align-self: center;
+  color: gray;
+  margin-bottom: 4rem;
+}
+.register-page .register-space .register-container .register-fields-container {
+  display: flex;
+  flex-direction: column;
+}
+.register-page .register-space .register-container .register-fields-container .register-text-box {
+  background-color: white;
+  border: 2px solid lightgray;
+  border-radius: 10px;
+  color: black;
+  font-size: 1.2rem;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.register-page .register-space .register-container .register-fields-container .register-button {
   padding: 10px;
   font-size: 18px;
   margin-bottom: 10px;
-}
-.register .btn {
-  padding: 10px;
-  font-size: 18px;
-  margin-bottom: 10px;
+  border-radius: 10px;
   border: none;
   color: white;
   background-color: black;
-}
-.register .google {
-  background-color: #4285f4;
-}
-.register .div {
-  margin-top: 7px;
 }/*# sourceMappingURL=Register.css.map */

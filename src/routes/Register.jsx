@@ -5,7 +5,7 @@ import {
   auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
-} from "../utils/firebase";   
+} from "../utils/firebase";
 import "./style/Register.css";
 
 function Register() {
@@ -20,43 +20,60 @@ function Register() {
   };
   useEffect(() => {
     if (loading) return;
-    if (user) navigate('/dashboard', {replace: true});
+    if (user) navigate("/dashboard", { replace: true });
   }, [user, loading]);
   return (
-    <div className="register">
-      <div className="container">
-        <input
-          type="text"
-          className="textBox"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          placeholder="Full Name"
-        />
-        <input
-          type="text"
-          className="textBox"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="E-mail Address"
-        />
-        <input
-          type="password"
-          className="textBox"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          placeholder="Password"
-        />
-        <button className="btn" onClick={register}>
-          Register
-        </button>
-        <button
-          className="btn google"
-          onClick={signInWithGoogle}
-        >
-          Register with Google
-        </button>
-        <div>
-          Already have an account? <Link to="/">Login</Link> now.
+    <div
+      style={{
+        height: "100vh",
+        backgroundImage: `url("/images/background.png")`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+      }}
+      className="register-page"
+    >
+      <div className="register-space">
+        <div className="register-container">
+          <div className="register-title-container">
+            <div className="title">Register</div>
+            <button className="google-button" onClick={signInWithGoogle}>
+              <img
+                className="google-button-icon"
+                src={process.env.PUBLIC_URL + "/google-color.svg"}
+              />
+              Register with google
+            </button>
+          </div>
+          <div className="register-or">-OR-</div>
+          <div className="register-fields-container">
+            <input
+              type="text"
+              className="register-text-box"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Full Name"
+            />
+            <input
+              type="text"
+              className="register-text-box"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="E-mail Address"
+            />
+            <input
+              type="password"
+              className="register-text-box"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+            />
+            <button className="register-button" onClick={register}>
+              Register
+            </button>
+            <div>
+              Already have an account? <Link to="/">Login</Link> now.
+            </div>
+          </div>
         </div>
       </div>
     </div>

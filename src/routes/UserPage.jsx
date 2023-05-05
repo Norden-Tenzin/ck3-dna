@@ -1,27 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import NavBar from "./NavBar";
 import { query, collection, getDocs, where } from "firebase/firestore";
-// style
-import "./style/Dashboard.css";
-// internal
 import { auth, db, logout } from "../utils/firebase";
+import UserData from "./UserData";
 
-function Dashboard() {
+export default function UserPage() {
   const [user, loading, error] = useAuthState(auth);
-  const [name, setName] = useState("");
+  const [userId, setUserId] = useState("");
+  const [isMyPage, setIsMyPage] = useState(false);
   const navigate = useNavigate();
+  const params = useParams();
+  const uid = params.uid;
 
-  const fetchUserName = async () => {
+  const fetchUserId = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
-      console.log(data);
-      setName(data.name);
+      return data.uid;
     } catch (error) {
       console.log(
-        "%cerror Dashboard.jsx line:23 ",
+        "%cerror UserPage.jsx line:21 ",
         "color: red; display: block; width: 100%;",
         error
       );
@@ -30,21 +31,23 @@ function Dashboard() {
 
   useEffect(() => {
     if (loading) return;
+    // if not logged in send to login page
     if (!user) return navigate("/");
-    fetchUserName();
+    fetchUserId().then((id) => {
+      console.log(id, uid)
+      if (id == uid) {
+        setIsMyPage(true);
+        setUserId(id);
+      } else {
+        setUserId(uid);
+      }
+      console.log(userId)
+    });
   }, [user, loading]);
-
   return (
-    <div className="dashboard">
-      <div className="container">
-        Logged in as
-        <div>{name}</div>
-        <div>{user?.email}</div>
-        <button className="btn" onClick={logout}>
-          Logout
-        </button>
-      </div>
+    <div>
+      <NavBar />
+      <UserData myPage={isMyPage} uid={userId} />
     </div>
   );
 }
-export default Dashboard;
