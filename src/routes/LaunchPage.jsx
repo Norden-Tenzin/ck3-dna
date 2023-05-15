@@ -3,10 +3,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../utils/firebase";
 import { query, collection, getDocs, where, orderBy } from "firebase/firestore";
-import "./style/LaunchPage.css";
+import "../style/LaunchPage.scss";
 import CardPage from "./CardPage";
 import CustomCard from "./CustomCard";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 
 function LaunchPage() {
   const [index, setIndex] = useState(0);

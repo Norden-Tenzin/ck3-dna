@@ -1,5 +1,5 @@
 import React from "react";
 
 export default function Tag(props) {
-  return <div className="tag-container">{props.value.toUpperCase()}</div>;
+  return <p className="tag">{props.value.toUpperCase()}</p>;
 }

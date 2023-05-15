@@ -5,7 +5,7 @@ import { query, collection, getDocs, where } from "firebase/firestore";
 // import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { FiPlus, FiShare } from "react-icons/fi";
 // style
-import "./style/Dashboard.css";
+import "../style/NavBar.scss";
 // internal
 import { auth, db, logout } from "../utils/firebase";
 
@@ -47,7 +47,6 @@ export default function NavBar() {
     if (!user) return navigate("/");
     fetchUserName();
     window.onclick = (event) => {
-      console.log("CLICK");
       if (pillRef.current && !pillRef.current.contains(event.target)) {
         setIsDropdownOpen(false);
       } else {

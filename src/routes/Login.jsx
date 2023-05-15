@@ -6,7 +6,7 @@ import {
   signInWithGoogle,
 } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
-import "./style/Login.css";
+import "../style/Login.scss";
 
 function Login() {
   const [email, setEmail] = useState("");

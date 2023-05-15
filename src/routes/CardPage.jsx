@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { query, collection, where, orderBy, getDocs } from "firebase/firestore";
 import axios from "axios";
+// style
+import "../style/CardPage.scss";
+// internal
 import CustomCard from "./CustomCard";
 import { db } from "../utils/firebase";
 
 export default function CardPage(props) {
-  console.log("HERE")
+  console.log("HERE");
   const [loaded, setIsLoaded] = React.useState(false);
   const [cardData, setCardData] = React.useState([]);
 

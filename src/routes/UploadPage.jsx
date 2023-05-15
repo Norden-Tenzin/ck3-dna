@@ -12,10 +12,10 @@ import {
 } from "firebase/storage";
 import * as uuid from "uuid";
 // style
-import "./style/LaunchPage.css";
+import "../style/LaunchPage.scss";
 // internal
 import { auth, db, logout, storage } from "../utils/firebase";
-import NavBar from "./NavBar";
+import NavBar from "../components/NavBar";
 // TODO:
 
 export default function UploadPage() {

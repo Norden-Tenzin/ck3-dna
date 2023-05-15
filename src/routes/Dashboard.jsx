@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { query, collection, getDocs, where } from "firebase/firestore";
 // style
-import "./style/Dashboard.css";
+import "../style/Dashboard.scss";
 // internal
 import { auth, db, logout } from "../utils/firebase";
 
