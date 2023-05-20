@@ -1,0 +1,19 @@
+.tag_holder {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  .tag {
+    background-color: #44d2ff;
+    font-size: 1rem;
+    border-radius: 75px;
+    padding: 5px 20px;
+  }
+}
+
+.card_icon {
+  color: white;
+  position: absolute;
+  left: -7%;
+  top: 90%;
+  transform: scale(.75);
+}

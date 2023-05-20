@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import CardPage from "./CardPage";
+import CardPage from "../components/CardPage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { query, collection, getDocs, where } from "firebase/firestore";
@@ -55,7 +55,12 @@ export default function UserPage() {
         <div className="page_items">
           <div className="user_data">
             <p className="user_name">UserName</p>
-            <p className="user_desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam ratione alias beatae nam, sit dicta soluta voluptatibus itaque! Temporibus voluptates at nostrum dicta cumque maiores eius provident error officia praesentium.</p>
+            <p className="user_desc">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+              ratione alias beatae nam, sit dicta soluta voluptatibus itaque!
+              Temporibus voluptates at nostrum dicta cumque maiores eius
+              provident error officia praesentium.
+            </p>
           </div>
           <div className="user_cards">
             {userId !== "" ? (

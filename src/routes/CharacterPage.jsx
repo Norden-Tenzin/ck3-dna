@@ -20,7 +20,7 @@ import "swiper/css/pagination";
 import "swiper/css/thumbs";
 import "../style/CharaPage.scss";
 // internal
-import Tag from "./Tag";
+import Tags from "../components/Tags";
 import { dna } from "../utils/helper";
 import { auth, db, logout, storage } from "../utils/firebase";
 import NavBar from "../components/NavBar";
@@ -62,7 +62,7 @@ export default function CharacterPage(props) {
       setIsLoaded(true);
     } catch (error) {
       console.log(
-        "%cerror CardPage.jsx line:31 ",
+        "%cerror CharacterPage.jsx line:31 ",
         "color: red; display: block; width: 100%;",
         error
       );
@@ -147,13 +147,7 @@ export default function CharacterPage(props) {
           </Swiper>
           <div className="chara_data">
             <p className="chara_name">{data["name"]}</p>
-            <div className="tag-holder">
-              {data["modList"]
-                ? data["modList"].map((mod, index) => (
-                    <Tag value={mod} key={index} />
-                  ))
-                : ""}
-            </div>
+            <Tags mods={data["modList"]}/>
             <p className="chara_desc">{data["description"]}</p>
             <p className="chara_auth">by John Doe</p>
             <p className="chara_date">29/02/2023</p>

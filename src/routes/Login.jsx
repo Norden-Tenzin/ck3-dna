@@ -18,7 +18,7 @@ function Login() {
       // maybe trigger a loading screen
       return;
     }
-    if (user) navigate("/launch");
+    if (user) navigate("/");
   }, [user, loading]);
   return (
     <div

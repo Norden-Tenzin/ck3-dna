@@ -4,6 +4,7 @@
     background-color: aqua;
     height: $navbar-height;
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     user-select: none;
     .logo {

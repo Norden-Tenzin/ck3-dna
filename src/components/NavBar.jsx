@@ -60,7 +60,7 @@ export default function NavBar() {
       <div
         className="logo"
         onClick={() => {
-          navigate("/launch");
+          navigate("/");
         }}
       >
         BRAND

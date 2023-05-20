@@ -1,80 +1,82 @@
 import React, { useEffect, useState } from "react";
+import CardPage from "../components/CardPage";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { query, collection, getDocs, where } from "firebase/firestore";
 import { auth, db, logout } from "../utils/firebase";
-import { query, collection, getDocs, where, orderBy } from "firebase/firestore";
+// style
 import "../style/LaunchPage.scss";
-import CardPage from "./CardPage";
-import CustomCard from "./CustomCard";
+// internal
 import NavBar from "../components/NavBar";
 
-function LaunchPage() {
-  const [index, setIndex] = useState(0);
+export default function UserPage() {
+  const [user, loading, error] = useAuthState(auth);
+  const [userId, setUserId] = useState("");
+  const [isMyPage, setIsMyPage] = useState(false);
+  const [childHeight, setChildHeight] = useState(0);
+  const navigate = useNavigate();
+
+  const handleScroll = () => {
+    const scrollTop = window.scrollY;
+    const scrollHeight = document.body.scrollHeight;
+    const clientHeight = document.documentElement.clientHeight;
+    console.log(
+      "%cCardPage.jsx line:39 scrollTop",
+      "color: #007acc;",
+      scrollTop
+    );
+    console.log(
+      "%cCardPage.jsx line:40 scrollHeight",
+      "color: #007acc;",
+      scrollHeight
+    );
+    console.log(
+      "%cCardPage.jsx line:41 clientHeight",
+      "color: #007acc;",
+      clientHeight
+    );
+    if (scrollTop + clientHeight >= scrollHeight) {
+      console.log("SCROLLED TO BOTTOM");
+    }
+    // if (!areMore) {
+    //   window.removeEventListener("scroll", handleScroll);
+    // }
+  };
+  useEffect(() => {
+    if (loading) return;
+  }, [loading]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
-    <div className="launch-page">
-      <NavBar />
-      <div className="tabs">
-        <div
-          onClick={() => {
-            setIndex(0);
-          }}
-          className={`${index === 0 ? "tab active-tab" : "tab"}`}
-        >
-          <div className="tab-title">Tab1</div>
-        </div>
-        <div
-          onClick={() => {
-            setIndex(1);
-          }}
-          className={`${index === 1 ? "tab active-tab" : "tab"}`}
-        >
-          <div className="tab-title">Tab2</div>
-        </div>
-        <div
-          onClick={() => {
-            setIndex(2);
-          }}
-          className={`${index === 2 ? "tab active-tab" : "tab"}`}
-        >
-          <div className="tab-title">Tab3</div>
-        </div>
-      </div>
-      <div className="contents">
-        <div
-          className={`${index === 0 ? "content active-content" : "content"}`}
-        >
-          <CardPage
-            className="card-page"
-            fieldName="modList"
-            condition="array-contains-any"
-            query={["epe", "cfp"]}
-          />
-        </div>
-        <div
-          className={`${index === 1 ? "content active-content" : "content"}`}
-        >
-          <div>Content2</div>
-          <div>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-            nihil nemo voluptates, reprehenderit ea ipsam impedit pariatur
-            voluptatum dolor est cupiditate perspiciatis consectetur facere,
-            neque excepturi debitis possimus ratione deleniti.
-          </div>
-        </div>
-        <div
-          className={`${index === 2 ? "content active-content" : "content"}`}
-        >
-          <div>Content3</div>
-          <div>
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laboriosam
-            nihil nemo voluptates, reprehenderit ea ipsam impedit pariatur
-            voluptatum dolor est cupiditate perspiciatis consectetur facere,
-            neque excepturi debitis possimus ratione deleniti.
+    <div className="page_container">
+      <div className="page">
+        <NavBar />
+        <div className="page_grid_container">
+          <div className="page_grid">
+            <div className="page_data">
+              <p className="page_name">UserName</p>
+              <p className="page_desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                ratione alias beatae nam, sit dicta soluta voluptatibus itaque!
+                Temporibus voluptates at nostrum dicta cumque maiores eius
+                provident error officia praesentium.
+              </p>
+            </div>
+            <div className="page_cards">
+              <CardPage
+                className="card-page"
+                fieldName="modList"
+                condition="array-contains-any"
+                query={["epe", "cfp"]}
+              />
+            </div>
           </div>
         </div>
       </div>
     </div>
   );
 }
-export default LaunchPage;

@@ -19,6 +19,10 @@ import UserPage from './routes/UserPage';
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <LaunchPage />,
+  },
+  {
+    path: "/login",
     element: <Login />,
   },
   {
@@ -32,10 +36,6 @@ const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
-  },
-  {
-    path: "/launch",
-    element: <LaunchPage />,
   },
   {
     path: "/chara/:charaId",
