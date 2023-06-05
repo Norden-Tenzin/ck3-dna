@@ -30,8 +30,11 @@ function Dashboard() {
 
   useEffect(() => {
     if (loading) return;
-    if (!user) return navigate("/");
-    fetchUserName();
+    if (!user) {
+      return navigate("/");
+    } else {
+      fetchUserName();
+    }
   }, [user, loading]);
 
   return (

@@ -21,6 +21,7 @@ export default function CardPage(props) {
   const [lastVisible, setLastVisible] = React.useState("");
   const [areMore, setAreMore] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
+  const limit_number = 9;
 
   useEffect(() => {
     getData();
@@ -28,7 +29,7 @@ export default function CardPage(props) {
 
   const getData = async () => {
     setIsLoading(true);
-    const limit_number = 9;
+    // const limit_number = 9;
     // console.log(props.fieldName, props.condition, props.query);
     let res = cardData;
     try {
@@ -79,21 +80,21 @@ export default function CardPage(props) {
   };
 
   const UnsplashImage = ({ url, key }) => (
-    <div className="image-item" key={key}>
+    <div className="image_item" key={key}>
       <img src={url} />
     </div>
   );
 
   return (
-    <div className="card-page">
+    <div className="card_page">
       <div className="scroll">
         <div>
-          <div className="card-grid">
+          <div className="card_grid">
             {loaded
               ? cardData.map((data, index) => (
                   <CustomCard data={data} key={index} />
                 ))
-              : ""}
+              : [...Array(limit_number)].map((_, index) => <CustomCard key={index} isSkeleton={true}/>)}
           </div>
           {cardData.length === 0 && <p>{"Loading..."}</p>}
           {areMore && cardData.length !== 0 && (

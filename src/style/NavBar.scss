@@ -1,67 +1,116 @@
-@import './Helper.scss';
+@import "./Helper.scss";
 
 .navbar {
-    background-color: aqua;
-    height: $navbar-height;
+  background-color: black;
+  height: $navbar-height;
+  min-height: $navbar-height;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: white;
+  // user-select: none;
+  .logo {
+    font-size: 3rem;
+    align-self: center;
+    margin-left: 2rem;
+    cursor: pointer;
+  }
+  .links {
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    user-select: none;
-    .logo {
-      font-size: 2rem;
-      align-self: center;
-      margin-left: 2rem;
+    margin-right: 2rem;
+    .navbar_button {
+      color: #f9f9f9;
+      background: #826a4c;
+      border: 2px solid #e1be7b;
+      border-radius: 5px;
+      margin: 0.7rem 0.25rem 0.7rem 0.25rem;
+      padding: 0 0.9rem 0 0.9rem;
+      font-size: 1rem;
       cursor: pointer;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.3s;
+      user-select: none;
+      touch-action: manipulation;
     }
-    .links {
+    .navbar_button:hover {
+      background-color: #a2865c;
+      transform: translateY(0);
+      transition-duration: 0.35s;
+    }
+    .navbar_button:active {
+      transform: translateY(2px);
+      transition-duration: 0.35s;
+    }
+    .navbar_account_icon_container {
+      align-self: center;
+      margin-right: 20px;
+      cursor: pointer;
+      .navbar_account_icon {
+        transform: scale(2);
+      }
+    }
+    .navbar_pill {
       display: flex;
-      .navbar-account-icon-container {
-        align-self: center;
-        margin-right: 20px;
+      color: #f9f9f9;
+      background: #826a4c;
+      border: 2px solid #e1be7b;
+      border-radius: 5px;
+      margin: 0.7rem 0.25rem 0.7rem 0.25rem;
+      padding: 0 0.9rem 0 0.9rem;
+      font-size: 1rem;
+      width: 6rem;
+      cursor: pointer;
+      transform: translate3d(0, 0, 0);
+      transition: all 0.3s;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+
+      .navbar_account_name {
+        padding-left: 0.4rem;
+        padding-right: 0.4rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .navbar_account_image {
+        aspect-ratio: 1/1;
+        object-fit: cover;
+        border-radius: 50%;
+      }
+    }
+    .navbar_pill:hover {
+      background-color: #a2865c;
+      // transform: translateY(0);
+      transition-duration: 0.35s;
+    }
+    .navbar_pill:active {
+      // transform: translateY(2px);
+      transition-duration: 0.35s;
+    }
+
+    .dropdown_content {
+      display: none;
+      position: absolute;
+      // top: 50px;
+      // right: 1rem;
+      background-color: #f9f9f9;
+      min-width: 160px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      padding: 12px 16px;
+      z-index: 200;
+      .dropdown_item {
+        border-bottom: 1px solid lightgray;
+        font-size: 1.5rem;
         cursor: pointer;
-        .navbar-account-icon {
-          transform: scale(2);
-        }
+        margin-bottom: 10px;
       }
-      .navbar-pill {
-        display: flex;
-        border-radius: 25px;
-        background-color: #aeaeae;
-        margin: 5px 0px;
-        margin-right: 20px;
-        cursor: pointer;
-        .navbar-account-name {
-          align-self: center;
-          font-size: 1rem;
-          padding-bottom: 5px;
-          padding-right: 20px;
-          padding-left: 30px;
-        }
-        .navbar-account-image {
-          aspect-ratio: 1/1;
-          object-fit: cover;
-          border-radius: 50%;
-        }
-      }
-      .dropdown-content {
-        display: none;
-        position: absolute;
-        top: 50px;
-        right: 1rem;
-        background-color: #f9f9f9;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-        padding: 12px 16px;
-        z-index: 2;
-        .dropdown-item {
-          border-bottom: 1px solid lightgray;
-          font-size: 1.5rem;
-          cursor: pointer;
-          margin-bottom: 10px;
-        }
-      }
-      .active-dropdown {
-        display: block;
-      }
+    }
+    .active_dropdown {
+      display: block;
     }
   }
+}

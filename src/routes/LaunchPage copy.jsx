@@ -3,7 +3,9 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { auth, db, logout } from "../utils/firebase";
 import { query, collection, getDocs, where, orderBy } from "firebase/firestore";
+// style
 import "../style/LaunchPage.scss";
+// internal
 import CardPage from "../components/CardPage";
 import NavBar from "../components/NavBar";
 

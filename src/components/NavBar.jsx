@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { query, collection, getDocs, where } from "firebase/firestore";
-// import { FaFileUpload, FaPlus } from "react-icons/fa";
 import { FiPlus, FiShare } from "react-icons/fi";
 // style
 import "../style/NavBar.scss";
@@ -43,17 +42,17 @@ export default function NavBar() {
   };
 
   useEffect(() => {
-    if (loading) return;
-    if (!user) return navigate("/");
     fetchUserName();
     window.onclick = (event) => {
-      if (pillRef.current && !pillRef.current.contains(event.target)) {
+      if (isDropdownOpen == true && pillRef.current && !pillRef.current.contains(event.target)) {
+        console.log("WRROOGN")
         setIsDropdownOpen(false);
       } else {
+        console.log("WRIGNT")
         setIsDropdownOpen((isDropdownOpen) => !isDropdownOpen);
       }
     };
-  }, [user, loading]);
+  }, [user, loading, isDropdownOpen]);
 
   return (
     <div className="navbar">
@@ -67,46 +66,56 @@ export default function NavBar() {
       </div>
       {!user ? (
         <div className="links">
-          <button>Signin</button>
-          <button>signup</button>
+          <button
+            className="navbar_button"
+            onClick={() => {
+              navigate("/login");
+            }}
+          >
+            sign in
+          </button>
+          <button
+            className="navbar_button"
+            onClick={() => {
+              navigate("/register");
+            }}
+          >
+            sign up
+          </button>
         </div>
       ) : (
         <div className="links">
-          {/* <button>Publish</button>
-        <button>Sign In</button> */}
           <div
-            className="navbar-account-icon-container"
+            className="navbar_account_icon_container"
             onClick={() => {
               navigate("/upload");
             }}
           >
-            <FiShare className="navbar-account-icon" />
+            <FiShare className="navbar_account_icon" />
           </div>
 
-          <div ref={pillRef} className="navbar-pill">
-            <div className="navbar-account-name">
-              {name != "" ? name.toLowerCase() : "..."}
+          <div ref={pillRef} className="navbar_pill" onClick={()=>{
+            setIsDropdownOpen(true)
+          }}>
+            <div className="navbar_account_name">
+              {name != "" ? `${name}` : "..."}
             </div>
-            <img
-              src={process.env.PUBLIC_URL + "/images/portrait.jpg"}
-              className="navbar-account-image"
-            />
             <div
               className={
                 isDropdownOpen
-                  ? "dropdown-content active-dropdown"
-                  : "dropdown-content"
+                  ? "dropdown_content active_dropdown"
+                  : "dropdown_content"
               }
             >
               <div
-                className="dropdown-item"
+                className="dropdown_item"
                 onClick={() => {
                   navigate(`/user/${userId}`);
                 }}
               >
                 Home
               </div>
-              <div className="dropdown-item" onClick={logout}>
+              <div className="dropdown_item" onClick={logout}>
                 Logout
               </div>
             </div>

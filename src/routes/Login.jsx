@@ -6,6 +6,7 @@ import {
   signInWithGoogle,
 } from "../utils/firebase";
 import { useAuthState } from "react-firebase-hooks/auth";
+// style
 import "../style/Login.scss";
 
 function Login() {

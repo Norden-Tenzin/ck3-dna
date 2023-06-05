@@ -11,18 +11,36 @@ import NavBar from "../components/NavBar";
 
 export default function UserPage() {
   const [user, loading, error] = useAuthState(auth);
+  const [data, setData] = useState(null);
   const [userId, setUserId] = useState("");
+  const [userName, setUserName] = useState("");
+  const [userDesc, setUserDesc] = useState("");
   const [isMyPage, setIsMyPage] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const uid = params.uid;
 
+  useEffect(() => {
+    fetchUserId();
+    if (data != null) {
+      if (data.id == uid) {
+        setIsMyPage(true);
+        setUserId(data.id);
+        setUserName(data.name);
+      } else {
+        setUserId(uid);
+        setUserName(data.name);
+      }
+    }
+  }, [data]);
+
   const fetchUserId = async () => {
     try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+      const q = query(collection(db, "users"), where("uid", "==", params?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
-      return data.uid;
+      console.log(data);
+      setData(data);
     } catch (error) {
       console.log(
         "%cerror UserPage.jsx line:21 ",
@@ -32,42 +50,30 @@ export default function UserPage() {
     }
   };
 
-  useEffect(() => {
-    if (loading) return;
-    // if not logged in send to login page
-    if (!user) return navigate("/");
-    fetchUserId().then((id) => {
-      console.log(id, uid);
-      if (id == uid) {
-        setIsMyPage(true);
-        setUserId(id);
-      } else {
-        setUserId(uid);
-      }
-      console.log(userId);
-    });
-  }, [user, loading]);
-
   return (
     <div className="page_container">
       <div className="page">
         <NavBar />
-        <div className="page_items">
-          <div className="user_data">
-            <p className="user_name">UserName</p>
-            <p className="user_desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-              ratione alias beatae nam, sit dicta soluta voluptatibus itaque!
-              Temporibus voluptates at nostrum dicta cumque maiores eius
-              provident error officia praesentium.
-            </p>
-          </div>
-          <div className="user_cards">
-            {userId !== "" ? (
-              <CardPage fieldName="authorId" condition="==" query={userId} />
-            ) : (
-              ""
-            )}
+        <div className="page_grid_container">
+          <div className="page_grid">
+            <div className="user_data">
+              <p className="user_name">{userName}</p>
+              <p className="user_desc">{userDesc}</p>
+              {/* <p className="page_name">UserName</p>
+              <p className="page_desc">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
+                ratione alias beatae nam, sit dicta soluta voluptatibus itaque!
+                Temporibus voluptates at nostrum dicta cumque maiores eius
+                provident error officia praesentium.
+              </p> */}
+            </div>
+            <div className="user_cards">
+              {userId !== "" ? (
+                <CardPage fieldName="authorId" condition="==" query={userId} />
+              ) : (
+                ""
+              )}
+            </div>
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Dispatch, SetStateAction } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination, Thumbs } from "swiper";
+import { Swiper as SwiperJSX, SwiperSlide } from "swiper/react";
+import { Swiper, Navigation, Pagination, Thumbs } from "swiper";
+import { useNavigate } from "react-router-dom";
 import { FaCopy } from "react-icons/fa";
-import { useAuthState } from "react-firebase-hooks/auth";
 import {
   query,
   collection,
@@ -11,6 +11,7 @@ import {
   orderBy,
   getDocs,
   limit,
+  DocumentData,
 } from "firebase/firestore";
 import ReactMarkdown from "react-markdown";
 // style
@@ -27,23 +28,27 @@ import NavBar from "../components/NavBar";
 import Modal from "../components/Modal";
 
 export default function CharacterPage(props) {
-  const [user, loading, error] = useAuthState(auth);
+  // const [user, loading, error] = useAuthState(auth);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
+  const [authorName, setAuthorName] = useState("");
   const [loaded, setIsLoaded] = React.useState(false);
   const [data, setData] = React.useState([]);
   const [copiedTimer, setCopiedTimer] = React.useState(0);
   const [isOpen, setIsOpen] = React.useState(false);
+  const navigate = useNavigate();
   const params = useParams();
   const charaId = params.charaId;
 
   useEffect(() => {
-    console.log(thumbsSwiper);
     getData();
-  }, [thumbsSwiper]);
+    if (data) {
+      getAuthorName();
+    }
+  }, [data]);
 
   const getData = async () => {
-    let res = [];
     try {
+      let res: DocumentData = [];
       const ref = collection(db, "posts");
       let q = query(
         ref,
@@ -53,13 +58,33 @@ export default function CharacterPage(props) {
       );
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        res.push(doc.data());
+        if (doc) {
+          res.push(doc.data());
+        }
       });
-      // console.log("RES:")
-      // console.log(typeof res);
-      console.log(res[0]["gridImages"]);
       setData(res[0]);
       setIsLoaded(true);
+    } catch (error) {
+      console.log(
+        "%cerror CharacterPage.jsx line:31 ",
+        "color: red; display: block; width: 100%;",
+        error
+      );
+    }
+  };
+
+  const getAuthorName = async () => {
+    try {
+      let res: DocumentData = [];
+      const ref = collection(db, "users");
+      let q = query(ref, where("uid", "==", data["authorId"]), limit(1));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        if (doc) {
+          res.push(doc.data());
+        }
+      });
+      setAuthorName(`@${res[0]["name"]}`);
     } catch (error) {
       console.log(
         "%cerror CharacterPage.jsx line:31 ",
@@ -87,9 +112,9 @@ export default function CharacterPage(props) {
     <div className="page_container">
       <div className="page">
         <NavBar />
-        {isOpen && <Modal setIsOpen={setIsOpen} data={data}/>}
+        {isOpen && <Modal setIsOpen={setIsOpen} data={data} />}
         <div className="page_items">
-          <Swiper
+          <SwiperJSX
             loop={true}
             centeredSlides={true}
             navigation={true}
@@ -104,22 +129,29 @@ export default function CharacterPage(props) {
             // onSwiper={(swiper) => console.log(swiper)}
             className="swiper"
           >
-            {data["displayImage"] ? (
+            {data.length != 0 ? (
               <SwiperSlide>
                 <img src={data["displayImage"]} className="swiper-image" />
               </SwiperSlide>
             ) : (
-              <SwiperSlide />
+              <SwiperSlide>
+                <div className="skeleton_img" />
+              </SwiperSlide>
             )}
-            {data["gridImages"] && data["gridImages"].length > 0
-              ? data["gridImages"].map((url, index) => (
-                  <SwiperSlide key={index}>
-                    <img src={url} className="swiper-image" />
-                  </SwiperSlide>
-                ))
-              : ""}
-          </Swiper>
-          <Swiper
+            {data["gridImages"] && data["gridImages"].length > 0 ? (
+              data["gridImages"].map((url, index) => (
+                <SwiperSlide key={index}>
+                  <img src={url} className="swiper-image" />
+                </SwiperSlide>
+              ))
+            ) : (
+              <SwiperSlide>
+                <div className="skeleton_img" />
+              </SwiperSlide>
+            )}
+          </SwiperJSX>
+          <SwiperJSX
+            // @ts-ignore
             onSwiper={setThumbsSwiper}
             spaceBetween={10}
             slidesPerView={4}
@@ -127,7 +159,7 @@ export default function CharacterPage(props) {
             modules={[Navigation, Thumbs]}
             className="swiper-thumb"
           >
-            {data["displayImage"] ? (
+            {data.length != 0 ? (
               <SwiperSlide>
                 <img
                   src={data["displayImage"]}
@@ -135,38 +167,119 @@ export default function CharacterPage(props) {
                 />
               </SwiperSlide>
             ) : (
-              <SwiperSlide />
+              <SwiperSlide>
+                <div className="skeleton_thumb_img" />
+              </SwiperSlide>
             )}
-            {data["gridImages"] && data["gridImages"].length > 0
-              ? data["gridImages"].map((url, index) => (
-                  <SwiperSlide key={index}>
-                    <img src={url} className="swiper-thumb-image" />
-                  </SwiperSlide>
-                ))
-              : ""}
-          </Swiper>
-          <div className="chara_data">
-            <p className="chara_name">{data["name"]}</p>
-            <Tags mods={data["modList"]}/>
-            <p className="chara_desc">{data["description"]}</p>
-            <p className="chara_auth">by John Doe</p>
-            <p className="chara_date">29/02/2023</p>
-            <div className="button_container">
-              <button className="button fill" onClick={buttonTimer}>
-                {copiedTimer > 0 ? "Copied" : "Copy DNA"}
-              </button>
-              <button
-                className="button border"
-                onClick={() => {
-                  setIsOpen(true);
-                }}
-              >
-                View DNA
-              </button>
-            </div>
-          </div>
+            {data["gridImages"] && data["gridImages"].length > 0 ? (
+              data["gridImages"].map((url, index) => (
+                <SwiperSlide key={index}>
+                  <img src={url} className="swiper-thumb-image" />
+                </SwiperSlide>
+              ))
+            ) : (
+              <SwiperSlide>
+                <div className="skeleton_thumb_img" />
+              </SwiperSlide>
+            )}
+          </SwiperJSX>
 
-          {/* <div className="data-container">
+          <div className="chara_data">
+            {data.length != 0 ? (
+              <p className="chara_name">{data["name"]}</p>
+            ) : (
+              <div className="skeleton_title"></div>
+            )}
+
+            {data.length != 0 ? (
+              <Tags mods={data["modList"]} />
+            ) : (
+              <Tags
+                className="tag_holder"
+                mods={["", ""]}
+                tagClassName={"skeleton_tag"}
+              />
+            )}
+
+            {data.length != 0 ? (
+              <p className="chara_desc">{data["description"]}</p>
+            ) : (
+              <div className="skeleton_body">
+                <div className="skeleton_text"></div>
+                <div className="skeleton_text"></div>
+                <div className="skeleton_text"></div>
+              </div>
+            )}
+
+            {authorName != "" ? (
+              <a
+                onClick={() => {
+                  navigate(`/user/${data["authorId"]}`);
+                }}
+                className="chara_auth"
+              >
+                {authorName}
+              </a>
+            ) : (
+              <div className="skeleton_text"></div>
+            )}
+
+            {data.length != 0 ? (
+              <p className="chara_date">29/02/2023</p>
+            ) : (
+              <div className="skeleton_text"></div>
+            )}
+
+            {data.length != 0 ? (
+              <div className="button_container">
+                <button className="button fill" onClick={buttonTimer}>
+                  {copiedTimer > 0 ? "Copied" : "Copy DNA"}
+                </button>
+                <button
+                  className="button border"
+                  onClick={() => {
+                    setIsOpen(true);
+                  }}
+                >
+                  View DNA
+                </button>
+              </div>
+            ) : (
+              <div className="skeleton_button_container">
+                <div className="skeleton_button"></div>
+                <div className="skeleton_button"></div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// ) : (
+//   <div className="skeleton_data">
+//     <div className="skeleton_title"></div>
+//     <Tags
+//       className="tag_holder"
+//       mods={["", ""]}
+//       tagClassName={"skeleton_tag"}
+//     />
+//     <div className="skeleton_body">
+//       <div className="skeleton_text"></div>
+//       <div className="skeleton_text"></div>
+//       <div className="skeleton_text"></div>
+//     </div>
+//     <div className="skeleton_text"></div>
+//     <div className="skeleton_button_container">
+//       <div className="skeleton_button"></div>
+//       <div className="skeleton_button"></div>
+//     </div>
+//   </div>
+// )}
+
+{
+  /* <div className="data-container">
             <div className="data-name">{data["name"]}</div>
             <div className="title-tag-container">
               <p className="data-title">mods used:</p>
@@ -197,9 +310,5 @@ export default function CharacterPage(props) {
               <ReactMarkdown children={"```" + data["dna"] + "```"} />
               <FaCopy className="dna-icon" />
             </div>
-        </div> */}
-        </div>
-      </div>
-    </div>
-  );
+        </div> */
 }

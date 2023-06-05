@@ -1,20 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 // style
-import './index.css';
+import "./index.css";
 // internal
-import Login from './routes/Login';
-import Register from './routes/Register';
-import Reset from './routes/Reset';
-import Dashboard from './routes/Dashboard';
-import LaunchPage from './routes/LaunchPage';
-import CharacterPage from './routes/CharacterPage';
-import UploadPage from './routes/UploadPage';
-import UserPage from './routes/UserPage';
+import Login from "./routes/Login";
+import Register from "./routes/Register";
+import Reset from "./routes/Reset";
+import Dashboard from "./routes/Dashboard";
+import LaunchPage from "./routes/LaunchPage";
+import CharacterPage from "./routes/CharacterPage";
+import UploadPage from "./routes/UploadPage";
+import UserPage from "./routes/UserPage";
 
 const router = createBrowserRouter([
   {
