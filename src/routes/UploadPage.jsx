@@ -16,7 +16,6 @@ import "../style/LaunchPage.scss";
 // internal
 import { auth, db, logout, storage } from "../utils/firebase";
 import NavBar from "../components/NavBar";
-// TODO:
 
 export default function UploadPage() {
   const navigate = useNavigate();

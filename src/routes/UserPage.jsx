@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import CardPage from "../components/CardPage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { auth, db, logout } from "../utils/firebase";
 // style
 import "../style/UserPage.scss";
 // internal
+import { auth, db, logout } from "../utils/firebase";
+import CardPage from "../components/CardPage";
 import NavBar from "../components/NavBar";
 
 export default function UserPage() {
@@ -39,7 +39,6 @@ export default function UserPage() {
       const q = query(collection(db, "users"), where("uid", "==", params?.uid));
       const doc = await getDocs(q);
       const data = doc.docs[0].data();
-      console.log(data);
       setData(data);
     } catch (error) {
       console.log(
@@ -59,13 +58,6 @@ export default function UserPage() {
             <div className="user_data">
               <p className="user_name">{userName}</p>
               <p className="user_desc">{userDesc}</p>
-              {/* <p className="page_name">UserName</p>
-              <p className="page_desc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam
-                ratione alias beatae nam, sit dicta soluta voluptatibus itaque!
-                Temporibus voluptates at nostrum dicta cumque maiores eius
-                provident error officia praesentium.
-              </p> */}
             </div>
             <div className="user_cards">
               {userId !== "" ? (

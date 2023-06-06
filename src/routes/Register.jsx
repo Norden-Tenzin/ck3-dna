@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Link, useHistory, useNavigate } from "react-router-dom";
+// style
 import {
   auth,
   registerWithEmailAndPassword,
   signInWithGoogle,
 } from "../utils/firebase";
-// style
 import "../style/Register.scss";
 
 function Register() {

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { FaCopy, FaHeart } from "react-icons/fa";
 import { MdOutlineFavoriteBorder, MdOutlineFavorite } from "react-icons/md";
+// internal
 import Tags from "../components/Tags";
 
 export default function CustomCard(props) {

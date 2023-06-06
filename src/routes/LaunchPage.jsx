@@ -3,10 +3,10 @@ import CardPage from "../components/CardPage";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, useParams } from "react-router-dom";
 import { query, collection, getDocs, where } from "firebase/firestore";
-import { auth, db, logout } from "../utils/firebase";
 // style
 import "../style/LaunchPage.scss";
 // internal
+import { auth, db, logout } from "../utils/firebase";
 import NavBar from "../components/NavBar";
 
 export default function UserPage() {

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+// style
 import {
   auth,
   logInWithEmailAndPassword,
   signInWithGoogle,
 } from "../utils/firebase";
-import { useAuthState } from "react-firebase-hooks/auth";
-// style
 import "../style/Login.scss";
 
 function Login() {
