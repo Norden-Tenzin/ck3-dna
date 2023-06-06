@@ -1,41 +1,41 @@
 @import "./Helper.scss";
 
 .navbar {
-  background-color: black;
-  height: $navbar-height;
-  min-height: $navbar-height;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  height: $navbar-height;
+  min-height: $navbar-height;
   color: white;
+  background-color: black;
   // user-select: none;
   .logo {
-    font-size: 3rem;
     align-self: center;
     margin-left: 2rem;
+    font-size: 3rem;
     cursor: pointer;
   }
   .links {
     display: flex;
     margin-right: 2rem;
     .navbar_button {
-      color: #f9f9f9;
-      background: #826a4c;
-      border: 2px solid #e1be7b;
-      border-radius: 5px;
       margin: 0.7rem 0.25rem 0.7rem 0.25rem;
       padding: 0 0.9rem 0 0.9rem;
+      border: 2px solid #e1be7b;
+      border-radius: 5px;
+      color: #f9f9f9;
       font-size: 1rem;
       cursor: pointer;
-      transform: translate3d(0, 0, 0);
-      transition: all 0.3s;
       user-select: none;
+      background: #826a4c;
+      transition: all 0.3s;
+      transform: translate3d(0, 0, 0);
       touch-action: manipulation;
     }
     .navbar_button:hover {
       background-color: #a2865c;
-      transform: translateY(0);
       transition-duration: 0.35s;
+      transform: translateY(0);
     }
     .navbar_button:active {
       transform: translateY(2px);

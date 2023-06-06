@@ -12,8 +12,8 @@ import axios from "axios";
 // style
 import "../style/CardPage.scss";
 // internal
-import CustomCard from "./CustomCard";
 import { db } from "../utils/firebase";
+import CustomCard from "./CustomCard";
 
 export default function CardPage(props) {
   const [loaded, setLoaded] = React.useState(false);

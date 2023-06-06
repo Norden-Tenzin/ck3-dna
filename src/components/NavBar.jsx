@@ -7,6 +7,7 @@ import { FiPlus, FiShare } from "react-icons/fi";
 import "../style/NavBar.scss";
 // internal
 import { auth, db, logout } from "../utils/firebase";
+import { Dropdown } from "./Dropdown";
 
 export default function NavBar() {
   const [user, loading, error] = useAuthState(auth);
@@ -14,7 +15,45 @@ export default function NavBar() {
   const [userId, setUserId] = useState("");
   const [name, setName] = useState("");
   const navigate = useNavigate();
-  const pillRef = useRef();
+  const [location, setLocation] = useState([
+    {
+      id: 0,
+      title: "New York",
+      selected: false,
+      key: "location",
+    },
+    {
+      id: 1,
+      title: "Dublin",
+      selected: false,
+      key: "location",
+    },
+    {
+      id: 2,
+      title: "California",
+      selected: false,
+      key: "location",
+    },
+    {
+      id: 3,
+      title: "Istanbul",
+      selected: false,
+      key: "location",
+    },
+    {
+      id: 4,
+      title: "Izmir",
+      selected: false,
+      key: "location",
+    },
+    {
+      id: 5,
+      title: "Oslo",
+      selected: false,
+      key: "location",
+    },
+  ]);
+
   const menuItems = [
     {
       title: "Home",
@@ -25,6 +64,7 @@ export default function NavBar() {
       url: "/services",
     },
   ];
+
   const fetchUserName = async () => {
     try {
       const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -43,16 +83,7 @@ export default function NavBar() {
 
   useEffect(() => {
     fetchUserName();
-    window.onclick = (event) => {
-      if (isDropdownOpen == true && pillRef.current && !pillRef.current.contains(event.target)) {
-        console.log("WRROOGN")
-        setIsDropdownOpen(false);
-      } else {
-        console.log("WRIGNT")
-        setIsDropdownOpen((isDropdownOpen) => !isDropdownOpen);
-      }
-    };
-  }, [user, loading, isDropdownOpen]);
+  }, [user, loading]);
 
   return (
     <div className="navbar">
@@ -93,35 +124,34 @@ export default function NavBar() {
           >
             <FiShare className="navbar_account_icon" />
           </div>
-
-          <div ref={pillRef} className="navbar_pill" onClick={()=>{
-            setIsDropdownOpen(true)
-          }}>
-            <div className="navbar_account_name">
-              {name != "" ? `${name}` : "..."}
-            </div>
-            <div
-              className={
-                isDropdownOpen
-                  ? "dropdown_content active_dropdown"
-                  : "dropdown_content"
-              }
-            >
-              <div
-                className="dropdown_item"
-                onClick={() => {
-                  navigate(`/user/${userId}`);
-                }}
-              >
-                Home
-              </div>
-              <div className="dropdown_item" onClick={logout}>
-                Logout
-              </div>
-            </div>
-          </div>
+          <Dropdown title={name != "" ? `${name}` : "..."} list={location}>
+            <DropdownMenu />
+          </Dropdown>
         </div>
       )}
     </div>
   );
+
+  function DropdownMenu(props) {
+    function DropdownItem(props) {
+      return (
+        <div className="dd-list-item" onClick={props.onClick}>
+          {props.children}
+        </div>
+      );
+    }
+    return (
+      <div className="dd-list">
+        <DropdownItem
+          onClick={() => {
+            console.log("HOME");
+            navigate(`/user/${userId}`);
+          }}
+        >
+          Home
+        </DropdownItem>
+        <DropdownItem onClick={logout}>Logout</DropdownItem>
+      </div>
+    );
+  }
 }

@@ -48,7 +48,7 @@ export default function CharacterPage(props) {
 
   const getData = async () => {
     try {
-      let res: DocumentData = [];
+      let res = [];
       const ref = collection(db, "posts");
       let q = query(
         ref,
@@ -75,7 +75,7 @@ export default function CharacterPage(props) {
 
   const getAuthorName = async () => {
     try {
-      let res: DocumentData = [];
+      let res = [];
       const ref = collection(db, "users");
       let q = query(ref, where("uid", "==", data["authorId"]), limit(1));
       const querySnapshot = await getDocs(q);
@@ -255,60 +255,4 @@ export default function CharacterPage(props) {
       </div>
     </div>
   );
-}
-
-// ) : (
-//   <div className="skeleton_data">
-//     <div className="skeleton_title"></div>
-//     <Tags
-//       className="tag_holder"
-//       mods={["", ""]}
-//       tagClassName={"skeleton_tag"}
-//     />
-//     <div className="skeleton_body">
-//       <div className="skeleton_text"></div>
-//       <div className="skeleton_text"></div>
-//       <div className="skeleton_text"></div>
-//     </div>
-//     <div className="skeleton_text"></div>
-//     <div className="skeleton_button_container">
-//       <div className="skeleton_button"></div>
-//       <div className="skeleton_button"></div>
-//     </div>
-//   </div>
-// )}
-
-{
-  /* <div className="data-container">
-            <div className="data-name">{data["name"]}</div>
-            <div className="title-tag-container">
-              <p className="data-title">mods used:</p>
-              <div className="tag-holder">
-                {data["modList"]
-                  ? data["modList"].map((mod, index) => (
-                      <Tag value={mod} key={index} />
-                    ))
-                  : ""}
-              </div>
-            </div>
-            <div className="title-tag-container">
-              <p className="data-title">tag:</p>
-              <div className="tag-holder">
-                {data["modList"]
-                  ? data["modList"].map((mod, index) => (
-                      <Tag value={mod} key={index} />
-                    ))
-                  : ""}
-              </div>
-            </div>
-            <div className="description">
-              <div className="description-title">Description:</div>
-              <div className="description-body">{data["description"]}</div>
-            </div>
-
-            <div className="data-dna">
-              <ReactMarkdown children={"```" + data["dna"] + "```"} />
-              <FaCopy className="dna-icon" />
-            </div>
-        </div> */
 }
