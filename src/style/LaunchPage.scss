@@ -24,11 +24,20 @@ body {
         margin: 4rem 40px 0px 40px;
         .page_data {
           grid-column: 1/5;
-          background-color: aqua;
+          height: fit-content;
+          // background-color: #c0ccd3;
+          border: 2px solid black;
+          border-radius: 5px;
+          padding: 1rem;
+          padding-bottom: 3rem;
           .page_name {
             font-size: 2rem;
             font-weight: 900;
             margin-bottom: 0.5rem;
+          }
+          .filter_button{
+            width: 100%;
+            padding: 0.5rem 0;
           }
           .page_desc {
             font-size: 1rem;

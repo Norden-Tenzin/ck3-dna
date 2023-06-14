@@ -6,7 +6,7 @@
 
 .tag {
   background-color: #44d2ff;
-  font-size: 1rem;
+  font-size: 0.7rem;
   border-radius: 75px;
   padding: 5px 20px;
 }
@@ -14,7 +14,6 @@
 .card_icon {
   color: white;
   position: absolute;
-  left: -7%;
+  left: 5px;
   top: 90%;
-  transform: scale(0.75);
 }

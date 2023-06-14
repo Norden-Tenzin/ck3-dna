@@ -1,0 +1,233 @@
+@import "./Helper.scss";
+// $card-img-button-background: #826a4c;
+// $card-img-button-border: #e1be7b;
+// $card-img-button-hover: #a2865c;
+
+$card-img-button-background: #826a4c;
+$card-img-button-border: #000000;
+$card-img-button-hover: #e1be7b;
+
+body {
+  background-color: $ck3-color;
+}
+
+.upload_page_container {
+  display: flex;
+  justify-content: center;
+  background-color: $ck3-color;
+  .upload_page {
+    max-width: 1280px;
+    width: 100%;
+    overflow: overlay;
+    background-color: white;
+    .upload_page_items {
+      // grid-column: 2/12;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 100px;
+      .form {
+        display: flex;
+        flex-direction: column;
+        margin: 2rem 5rem;
+        .upload-gallery {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: 1rem;
+          .card-image-button {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            aspect-ratio: 1.8 / 3;
+            width: 100%;
+            height: 100%;
+            background: white;
+            border: 2px solid $card-img-button-border;
+            border-radius: 5px;
+            position: relative;
+            .card-image-icon {
+              color: $card-img-button-border;
+              transform: scale(2);
+              position: absolute;
+              top: 50%;
+              left: 50%;
+            }
+            cursor: pointer;
+          }
+          .card-image-button:hover {
+            transition-duration: 0.35s;
+            .card-image-icon {
+              transform: scale(2.5);
+              transition-duration: 0.35s;
+            }
+          }
+          .card-image-button:active {
+            transform: translateY(2px);
+            transition-duration: 0.35s;
+            .card-image-icon {
+              transform: scale(2.5);
+            }
+          }
+          .card-image {
+            box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+
+            object-fit: cover;
+            border-style: solid;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+            border: 2px solid $card-img-button-border;
+            border-radius: 5px;
+            justify-content: center;
+            align-items: center;
+            aspect-ratio: 1.8 / 3;
+            cursor: pointer;
+          }
+        }
+        .field-container {
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+          margin-top: 1rem;
+          .chara-field-container {
+            width: 70%;
+            .chara-field {
+              width: 100%;
+              border-radius: 5px;
+              border: 2px solid black;
+            }
+            .chara-field::placeholder {
+              color: black;
+            }
+            .chara-field:focus {
+              border: 2px solid $card-img-button-hover;
+              outline: none;
+            }
+            // .chara-field:hover {
+            //   background-color: #a2865c;
+            //   transition-duration: 0.35s;
+            //   transform: translateY(0);
+            // }
+            .chara-field:active {
+              transform: translateY(2px);
+              transition-duration: 0.35s;
+            }
+          }
+          .chara-mods {
+            display: flex;
+            flex-direction: column;
+            .label {
+              font-size: 1rem;
+            }
+          }
+          .chara-sex {
+            display: flex;
+            display: flex;
+            flex-direction: column;
+            .label {
+              font-size: 1rem;
+            }
+          }
+          .checkboxes {
+            display: flex;
+            flex-direction: row;
+            width: fit-content;
+            .checkbox {
+              @include click;
+              background-color: #44d2ff;
+              border-radius: 1rem;
+              padding: 5px 10px;
+              margin-right: 0.5rem;
+            }
+            .checkbox input[type="checkbox"] {
+              @include click;
+              height: 0.75rem;
+              width: 0.75rem;
+              border-radius: 50%;
+              vertical-align: middle;
+              border: 1px solid white;
+              background-color: white;
+              appearance: none;
+              -webkit-appearance: none;
+              outline: none;
+            }
+            .checkbox input[type="checkbox"]:checked {
+              border: 2px solid white;
+              background-color: #44d2ff;
+            }
+            .checkbox input[type="checkbox"]::after {
+              border-radius: 50%;
+              vertical-align: middle;
+              border: 1px solid #ddd;
+              appearance: none;
+              -webkit-appearance: none;
+              outline: none;
+            }
+          }
+          .button-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: start;
+            .form-submit {
+              width: 40%;
+              background-color: $card-img-button-background;
+              border: 2px solid #e1be7b;
+              color: white;
+              padding: 10px 0px;
+              border-radius: 5px;
+              font-size: 1rem;
+              font-weight: bold;
+              cursor: pointer;
+            }
+            :hover {
+              transform: translateY(0);
+              transition-duration: 0.35s;
+              background-color: #a2865c;
+            }
+            :active {
+              transform: translateY(2px);
+              transition-duration: 0.35s;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+input[type="text"],
+select {
+  display: inline-block;
+  width: 100%;
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+}
+
+input[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+textarea,
+select {
+  // width: 100%;
+  padding: 12px 20px;
+  // margin: 8px 0;
+  // display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  resize: none;
+}

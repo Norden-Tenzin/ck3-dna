@@ -61,7 +61,7 @@ export default function UserPage() {
             </div>
             <div className="user_cards">
               {userId !== "" ? (
-                <CardPage fieldName="authorId" condition="==" query={userId} />
+                <CardPage fieldName="authorId" condition="==" expression={userId} />
               ) : (
                 ""
               )}

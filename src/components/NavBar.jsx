@@ -93,7 +93,7 @@ export default function NavBar() {
           navigate("/");
         }}
       >
-        BRAND
+        CK3-DNA
       </div>
       {!user ? (
         <div className="links">
@@ -124,7 +124,7 @@ export default function NavBar() {
           >
             <FiShare className="navbar_account_icon" />
           </div>
-          <Dropdown title={name != "" ? `${name}` : "..."} list={location}>
+          <Dropdown title={name != "" ? `${name}` : "..."} >
             <DropdownMenu />
           </Dropdown>
         </div>

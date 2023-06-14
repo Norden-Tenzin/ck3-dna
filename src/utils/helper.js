@@ -1,3 +1,4 @@
+export const limit_number = 12;
 export const dna = 
 `
 ruler_designer_542719970={

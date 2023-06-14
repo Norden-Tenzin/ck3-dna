@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { FaFileUpload, FaPlus } from "react-icons/fa";
+import { TfiPlus } from "react-icons/tfi";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import { query, collection, getDocs, where, addDoc } from "firebase/firestore";
@@ -12,7 +13,7 @@ import {
 } from "firebase/storage";
 import * as uuid from "uuid";
 // style
-import "../style/LaunchPage.scss";
+import "../style/UploadPage.scss";
 // internal
 import { auth, db, logout, storage } from "../utils/firebase";
 import NavBar from "../components/NavBar";
@@ -30,7 +31,7 @@ export default function UploadPage() {
   // CHECKBOX
   const [isCheckedMod1, setIsCheckedMod1] = useState(false);
   const [isCheckedMod2, setIsCheckedMod2] = useState(false);
-  const [isCheckedVanila, setIsCheckedVanila] = useState(false);
+  const [isCheckedVanilla, setIsCheckedVanilla] = useState(false);
   const [isCheckedMale, setIsCheckedMale] = useState(false);
   const [isCheckedFemale, setIsCheckedFemale] = useState(false);
   // DISPLAY IMAGE
@@ -59,7 +60,7 @@ export default function UploadPage() {
     const res = [];
     if (isCheckedMod1) res.push("epe");
     if (isCheckedMod2) res.push("cfp");
-    if (isCheckedVanila) res.push("vanila");
+    if (isCheckedVanilla) res.push("vanilla");
     return res;
   };
 
@@ -71,31 +72,31 @@ export default function UploadPage() {
 
   // NOTE: Checkbox handlers
   const handleChangeMod1 = () => {
-    if (isCheckedVanila == true && isCheckedMod1 == false) {
-      setIsCheckedVanila(false);
+    if (isCheckedVanilla == true && isCheckedMod1 == false) {
+      setIsCheckedVanilla(false);
       setIsCheckedMod1(true);
     } else {
       setIsCheckedMod1(!isCheckedMod1);
     }
   };
   const handleChangeMod2 = () => {
-    if (isCheckedVanila == true && isCheckedMod1 == false) {
-      setIsCheckedVanila(false);
+    if (isCheckedVanilla == true && isCheckedMod1 == false) {
+      setIsCheckedVanilla(false);
       setIsCheckedMod2(true);
     } else {
       setIsCheckedMod2(!isCheckedMod2);
     }
   };
-  const handleChangeVanila = () => {
+  const handleChangeVanilla = () => {
     if (
-      isCheckedVanila == false &&
+      isCheckedVanilla == false &&
       (isCheckedMod1 == true || isCheckedMod2 == true)
     ) {
-      setIsCheckedVanila(true);
+      setIsCheckedVanilla(true);
       setIsCheckedMod1(false);
       setIsCheckedMod2(false);
     } else {
-      setIsCheckedVanila(!isCheckedVanila);
+      setIsCheckedVanilla(!isCheckedVanilla);
     }
   };
   const handleChangeMale = () => {
@@ -221,6 +222,7 @@ export default function UploadPage() {
         }
       });
     };
+
     const uploadImages = async () => {
       let imgLst = [];
       if (displayImage !== null) {
@@ -298,206 +300,208 @@ export default function UploadPage() {
   };
 
   return (
-    <div>
-      <NavBar />
-      <div className="upload-page">
-        <form className="form">
-          {/* DISPLAY IMAGE */}
-          <div>
-            <input
-              required
-              type="file"
-              ref={hiddenDisplayImageInput}
-              onChange={handleChangeDisplayImage}
-              style={{ display: "none" }}
-            />
-            {/* GRID IMAGE */}
-            <input
-              type="file"
-              ref={hiddenGridImageInput1}
-              onChange={handleChangeGridImage1}
-              style={{ display: "none" }}
-            />
-            <input
-              type="file"
-              ref={hiddenGridImageInput2}
-              onChange={handleChangeGridImage2}
-              style={{ display: "none" }}
-            />
-            <input
-              type="file"
-              ref={hiddenGridImageInput3}
-              onChange={handleChangeGridImage3}
-              style={{ display: "none" }}
-            />
-          </div>
-
-          <div className="upload-gallery">
-            {displayImage == null ? (
-              <div
-                onClick={handleDisplayClick}
-                className="display-card-image-button"
-              >
-                <FaPlus className="display-card-image-icon" />
-              </div>
-            ) : (
-              <img
-                src={URL.createObjectURL(displayImage)}
-                className="display-card-image"
+    <div className="upload_page_container">
+      <div className="upload_page">
+        <NavBar />
+        <div className="upload_page_items">
+          <form className="form">
+            {/* DISPLAY IMAGE */}
+            <div>
+              <input
+                required
+                type="file"
+                ref={hiddenDisplayImageInput}
+                onChange={handleChangeDisplayImage}
+                style={{ display: "none" }}
               />
-            )}
+              {/* GRID IMAGE */}
+              <input
+                type="file"
+                ref={hiddenGridImageInput1}
+                onChange={handleChangeGridImage1}
+                style={{ display: "none" }}
+              />
+              <input
+                type="file"
+                ref={hiddenGridImageInput2}
+                onChange={handleChangeGridImage2}
+                style={{ display: "none" }}
+              />
+              <input
+                type="file"
+                ref={hiddenGridImageInput3}
+                onChange={handleChangeGridImage3}
+                style={{ display: "none" }}
+              />
+            </div>
+            <h1>UPLOAD A NEW CHARACTER</h1>
+            <div className="upload-gallery">
+              {displayImage == null ? (
+                <div onClick={handleDisplayClick} className="card-image-button">
+                  <TfiPlus className="card-image-icon" />
+                </div>
+              ) : (
+                <img
+                  src={URL.createObjectURL(displayImage)}
+                  onClick={handleDisplayClick}
+                  className="card-image"
+                />
+              )}
 
-            <div className="gallery-card-image-row">
               {gridImage1 == null ? (
-                <div
-                  onClick={handleGridClick1}
-                  className="gallery-card-image-container"
-                >
-                  <FaPlus className="gallery-card-image-icon" />
+                <div onClick={handleGridClick1} className="card-image-button">
+                  <TfiPlus className="card-image-icon" />
                 </div>
               ) : (
                 <img
                   src={URL.createObjectURL(gridImage1)}
-                  className="gallery-card-image"
+                  onClick={handleGridClick1}
+                  className="card-image"
                 />
               )}
               {gridImage2 == null ? (
-                <div
-                  onClick={handleGridClick2}
-                  className="gallery-card-image-container"
-                >
-                  <FaPlus className="gallery-card-image-icon" />
+                <div onClick={handleGridClick2} className="card-image-button">
+                  <TfiPlus className="card-image-icon" />
                 </div>
               ) : (
                 <img
                   src={URL.createObjectURL(gridImage2)}
-                  className="gallery-card-image"
+                  onClick={handleGridClick2}
+                  className="card-image"
                 />
               )}
               {gridImage3 == null ? (
-                <div
-                  onClick={handleGridClick3}
-                  className="gallery-card-image-container"
-                >
-                  <FaPlus className="gallery-card-image-icon" />
+                <div onClick={handleGridClick3} className="card-image-button">
+                  <TfiPlus className="card-image-icon" />
                 </div>
               ) : (
                 <img
                   src={URL.createObjectURL(gridImage3)}
-                  className="gallery-card-image"
+                  onClick={handleGridClick3}
+                  className="card-image"
                 />
               )}
             </div>
-          </div>
-          {/* <div className="title">Display Picture</div> */}
-          <div className="field-container">
-            {reqFail == true ? (
-              <span style={{ color: "red" }}>
-                * Required field/fields are empty
-              </span>
-            ) : (
-              ""
-            )}
-            <span>(All fields are required unless specified)</span>
-            <label className="chara-name">
-              <input
-                required
-                type="text"
-                value={charaName}
-                placeholder="Name"
-                onChange={(e) => setCharaName(e.target.value)}
-              />
-            </label>
-            <div className="chara-mods">
+            {/* <div className="title">Display Picture</div> */}
+            <div className="field-container">
+              {reqFail && (
+                <span style={{ color: "red" }}>
+                  * Required field/fields are empty
+                </span>
+              )}
+              <span>(All fields are required unless specified)</span>
+              <label className="chara-field-container">
+                <input
+                  required
+                  type="text"
+                  value={charaName}
+                  placeholder="Name"
+                  className="chara-field"
+                  onChange={(e) => setCharaName(e.target.value)}
+                />
+              </label>
               <span className="label">
-                Mods: Note: you cant have mods tag selected along with vanila
-                tag
+                Note: you cant have mods tag selected along with vanilla tag
               </span>
-              <div className="checkboxes">
-                <label className="checkbox">
-                  EPE
-                  <input
-                    type="checkbox"
-                    checked={isCheckedMod1}
-                    onChange={handleChangeMod1}
-                  />
-                </label>
-                <label className="checkbox">
-                  CFP
-                  <input
-                    type="checkbox"
-                    checked={isCheckedMod2}
-                    onChange={handleChangeMod2}
-                  />
-                </label>
-                <label className="checkbox">
-                  <input
-                    type="checkbox"
-                    checked={isCheckedVanila}
-                    onChange={handleChangeVanila}
-                  />
-                  Vanila
-                </label>
+              <div className="chara-mods">
+                <span className="label">Mods:</span>
+                <div className="checkboxes">
+                  <label className="checkbox">
+                    EPE
+                    <input
+                      type="checkbox"
+                      checked={isCheckedMod1}
+                      onChange={handleChangeMod1}
+                    />
+                  </label>
+                  <label className="checkbox">
+                    CFP
+                    <input
+                      type="checkbox"
+                      checked={isCheckedMod2}
+                      onChange={handleChangeMod2}
+                    />
+                  </label>
+                  <label className="checkbox">
+                    Vanilla
+                    <input
+                      type="checkbox"
+                      checked={isCheckedVanilla}
+                      onChange={handleChangeVanilla}
+                    />
+                  </label>
+                </div>
               </div>
-            </div>
-            <div className="chara-sex">
-              <span className="label">Sex:</span>
-              <div className="checkboxes">
-                <label className="checkbox">
-                  Male
-                  <input
-                    type="checkbox"
-                    checked={isCheckedMale}
-                    onChange={handleChangeMale}
-                  />
-                </label>
-                <label className="checkbox">
-                  Female
-                  <input
-                    type="checkbox"
-                    checked={isCheckedFemale}
-                    onChange={handleChangeFemale}
-                  />
-                </label>
+              <div className="chara-sex">
+                <span className="label">Sex:</span>
+                <div className="checkboxes">
+                  <label className="checkbox">
+                    Male
+                    <input
+                      type="checkbox"
+                      checked={isCheckedMale}
+                      onChange={handleChangeMale}
+                    />
+                  </label>
+                  <label className="checkbox">
+                    Female
+                    <input
+                      type="checkbox"
+                      checked={isCheckedFemale}
+                      onChange={handleChangeFemale}
+                    />
+                  </label>
+                </div>
               </div>
-            </div>
-            <label className="chara-des-container">
-              <textarea
-                className="chara-des"
-                required
-                placeholder="Description (Opt.)"
-                type="text"
-                value={description}
-                rows="10"
-                cols="50"
-                onChange={(e) => setDescription(e.target.value)}
-              />
-            </label>
-            <label className="chara-dna-container">
-              <textarea
-                className="chara-dna"
-                placeholder="Dna"
-                required
-                type="text"
-                value={dna}
-                rows="50"
-                cols="50"
-                onChange={(e) => setDna(e.target.value)}
-              />
-            </label>
-            <span>{postId}</span>
-            <div className="button-container">
-              <button
-                className="form-submit"
-                disabled={isLoading}
-                onClick={handleSubmit}
+              <label
+                className="chara-field-container"
+                style={{ width: "100%" }}
               >
-                {isLoading ? <span>loading</span> : <span>Submit</span>}
-              </button>
+                <textarea
+                  className="chara-field"
+                  style={{ width: "100%" }}
+                  placeholder="Description (Opt.)"
+                  type="text"
+                  value={description}
+                  rows="10"
+                  cols="50"
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </label>
+              <label
+                className="chara-field-container"
+                style={{ width: "100%" }}
+              >
+                <textarea
+                  className="chara-field"
+                  style={{ width: "100%" }}
+                  placeholder="Dna"
+                  required
+                  type="text"
+                  value={dna}
+                  rows="50"
+                  cols="50"
+                  onChange={(e) => setDna(e.target.value)}
+                />
+              </label>
+              {/* <span>{postId}</span> */}
+              <div className="button-container">
+                <button
+                  className="form-submit"
+                  disabled={isLoading}
+                  onClick={handleSubmit}
+                >
+                  {isLoading ? <span>LOADING</span> : <span>SUMBIT</span>}
+                </button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );
 }
+
+// TODO
+// 1 reset submit page once its finished and scroll to top
+// 2

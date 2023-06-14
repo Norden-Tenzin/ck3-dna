@@ -4,6 +4,7 @@ import { Swiper as SwiperJSX, SwiperSlide } from "swiper/react";
 import { Swiper, Navigation, Pagination, Thumbs } from "swiper";
 import { useNavigate } from "react-router-dom";
 import { FaCopy } from "react-icons/fa";
+import { GiFemale, GiMale } from "react-icons/gi";
 import {
   query,
   collection,
@@ -40,11 +41,10 @@ export default function CharacterPage(props) {
   const charaId = params.charaId;
 
   useEffect(() => {
-    getData();
-    if (data) {
-      getAuthorName();
-    }
-  }, [data]);
+    getData().then((data) => {
+      getAuthorName(data);
+    });
+  }, []);
 
   const getData = async () => {
     try {
@@ -57,13 +57,10 @@ export default function CharacterPage(props) {
         limit(1)
       );
       const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        if (doc) {
-          res.push(doc.data());
-        }
-      });
-      setData(res[0]);
+      const doc = querySnapshot.docs[0];
+      setData(doc.data());
       setIsLoaded(true);
+      return doc.data();
     } catch (error) {
       console.log(
         "%cerror CharacterPage.jsx line:31 ",
@@ -73,18 +70,14 @@ export default function CharacterPage(props) {
     }
   };
 
-  const getAuthorName = async () => {
+  const getAuthorName = async (data) => {
     try {
       let res = [];
       const ref = collection(db, "users");
       let q = query(ref, where("uid", "==", data["authorId"]), limit(1));
       const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        if (doc) {
-          res.push(doc.data());
-        }
-      });
-      setAuthorName(`@${res[0]["name"]}`);
+      const doc = querySnapshot.docs[0];
+      setAuthorName(`@${doc.data()["name"]}`);
     } catch (error) {
       console.log(
         "%cerror CharacterPage.jsx line:31 ",
@@ -127,11 +120,11 @@ export default function CharacterPage(props) {
             slidesPerView={1}
             // onSlideChange={() => console.log("slide change")}
             // onSwiper={(swiper) => console.log(swiper)}
-            className="swiper"
+            className="my-swiper"
           >
             {data.length != 0 ? (
               <SwiperSlide>
-                <img src={data["displayImage"]} className="swiper-image" />
+                <img src={data["displayImage"]} className="my-swiper-image" />
               </SwiperSlide>
             ) : (
               <SwiperSlide>
@@ -141,7 +134,7 @@ export default function CharacterPage(props) {
             {data["gridImages"] && data["gridImages"].length > 0 ? (
               data["gridImages"].map((url, index) => (
                 <SwiperSlide key={index}>
-                  <img src={url} className="swiper-image" />
+                  <img src={url} className="my-swiper-image" />
                 </SwiperSlide>
               ))
             ) : (
@@ -157,13 +150,13 @@ export default function CharacterPage(props) {
             slidesPerView={4}
             watchSlidesProgress={true}
             modules={[Navigation, Thumbs]}
-            className="swiper-thumb"
+            className="my-swiper-thumb"
           >
             {data.length != 0 ? (
               <SwiperSlide>
                 <img
                   src={data["displayImage"]}
-                  className="swiper-thumb-image"
+                  className="my-swiper-thumb-image"
                 />
               </SwiperSlide>
             ) : (
@@ -174,7 +167,7 @@ export default function CharacterPage(props) {
             {data["gridImages"] && data["gridImages"].length > 0 ? (
               data["gridImages"].map((url, index) => (
                 <SwiperSlide key={index}>
-                  <img src={url} className="swiper-thumb-image" />
+                  <img src={url} className="my-swiper-thumb-image" />
                 </SwiperSlide>
               ))
             ) : (
@@ -183,10 +176,16 @@ export default function CharacterPage(props) {
               </SwiperSlide>
             )}
           </SwiperJSX>
-
           <div className="chara_data">
             {data.length != 0 ? (
-              <p className="chara_name">{data["name"]}</p>
+              <div className="chara_name_container">
+                <p className="chara_name">{data["name"]}</p>
+                {data["sex"] == "male" ? (
+                  <GiMale size={30} />
+                ) : (
+                  <GiFemale size={30} />
+                )}
+              </div>
             ) : (
               <div className="skeleton_title"></div>
             )}
@@ -204,6 +203,12 @@ export default function CharacterPage(props) {
             {data.length != 0 ? (
               <p className="chara_desc">{data["description"]}</p>
             ) : (
+              // <p className="chara_desc">
+              //   Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit
+              //   quis tenetur quisquam, molestiae minus numquam molestias eos
+              //   temporibus perferendis ipsum sunt laborum obcaecati eveniet
+              //   culpa voluptatem delectus dolorum nulla veniam.
+              // </p>
               <div className="skeleton_body">
                 <div className="skeleton_text"></div>
                 <div className="skeleton_text"></div>

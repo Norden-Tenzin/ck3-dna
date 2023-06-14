@@ -14,6 +14,7 @@ import "../style/CardPage.scss";
 // internal
 import { db } from "../utils/firebase";
 import CustomCard from "./CustomCard";
+import { limit_number } from "../utils/helper";
 
 export default function CardPage(props) {
   const [loaded, setLoaded] = React.useState(false);
@@ -21,51 +22,69 @@ export default function CardPage(props) {
   const [lastVisible, setLastVisible] = React.useState("");
   const [areMore, setAreMore] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
-  const limit_number = 9;
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [props.myQuery, props.myWhere]);
 
   const getData = async () => {
     setIsLoading(true);
-    // const limit_number = 9;
-    // console.log(props.fieldName, props.condition, props.query);
-    let res = cardData;
+    let res = [];
     try {
       let q;
       const ref = collection(db, "posts");
-      if (lastVisible === "") {
-        console.log("firstTime", "color: #007acc;");
-        q = query(
-          ref,
-          where(props.fieldName, props.condition, props.query),
-          orderBy("date", "desc"),
-          limit(limit_number)
-        );
-      } else {
-        console.log("nextTime", "color: #007acc;");
-        console.log(
-          "%cCardPage.jsx line:43 lastVisible",
-          "color: #007acc;",
-          lastVisible
-        );
-        q = query(
-          ref,
-          where(props.fieldName, props.condition, props.query),
-          orderBy("date", "desc"),
-          startAfter(lastVisible),
-          limit(5)
-        );
-      }
+      q = query(
+        ref,
+        ...props.myWhere,
+        orderBy("date", "desc"),
+        limit(limit_number)
+      );
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         res.push(doc.data());
       });
       setAreMore(querySnapshot.docs.length < limit_number ? false : true);
-      console.log("%cCardPage.jsx line:85 areMore", "color: #007acc;", areMore);
-      if (areMore)
+      if (querySnapshot.docs.length >= limit_number === true) {
         setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+      } else {
+        setLastVisible(null);
+      }
+      setCardData(res);
+      setLoaded(true);
+    } catch (error) {
+      console.log(
+        "%cerror CardPage.jsx line:31 ",
+        "color: red; display: block; width: 100%;",
+        error
+      );
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadMoreData = async () => {
+    setIsLoading(true);
+    let res = cardData;
+    try {
+      let q;
+      const ref = collection(db, "posts");
+      q = query(
+        ref,
+        ...props.myWhere,
+        orderBy("date", "desc"),
+        startAfter(lastVisible),
+        limit(limit_number)
+      );
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        res.push(doc.data());
+      });
+      setAreMore(querySnapshot.docs.length < limit_number ? false : true);
+      if (querySnapshot.docs.length >= limit_number === true) {
+        setLastVisible(querySnapshot.docs[querySnapshot.docs.length - 1]);
+      } else {
+        setLastVisible(null);
+      }
       setCardData(res);
       setLoaded(true);
     } catch (error) {
@@ -94,20 +113,29 @@ export default function CardPage(props) {
               ? cardData.map((data, index) => (
                   <CustomCard data={data} key={index} />
                 ))
-              : [...Array(limit_number)].map((_, index) => <CustomCard key={index} isSkeleton={true}/>)}
+              : [...Array(limit_number)].map((_, index) => (
+                  <CustomCard key={index} isSkeleton={true} />
+                ))}
+            {areMore && cardData.length !== 0 && (
+              <button
+                className="end"
+                onClick={() => {
+                  loadMoreData();
+                }}
+              >
+                Show More
+              </button>
+            )}
+            {!areMore && <p className="end">END</p>}
           </div>
-          {cardData.length === 0 && <p>{"Loading..."}</p>}
-          {areMore && cardData.length !== 0 && (
-            <button
-              className="end"
-              onClick={() => {
-                getData();
-              }}
-            >
-              Load More
-            </button>
-          )}
-          {!areMore && <p className="end">END</p>}
+          {/* {cardData.length === 0 && (
+            <di className="loading_card_grid">
+              <CustomCard isSkeleton={true} />
+              <CustomCard isSkeleton={true} />
+            </di>
+          )} */}
+
+          
         </div>
       </div>
     </div>
