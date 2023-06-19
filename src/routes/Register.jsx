@@ -73,7 +73,7 @@ function Register() {
               Register
             </button>
             <div>
-              Already have an account? <Link to="/">Login</Link> now.
+              Already have an account? <Link to="/#/">Login</Link> now.
             </div>
           </div>
         </div>
