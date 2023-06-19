@@ -15,35 +15,35 @@ import UserPage from "./routes/UserPage";
 
 const router = createBrowserRouter([
   {
-    path: "/ck3-dna/",
+    path: "/#/",
     element: <LaunchPage />,
   },
   {
-    path: "/ck3-dna/login",
+    path: "/#/login",
     element: <Login />,
   },
   {
-    path: "/ck3-dna/register",
+    path: "/#/register",
     element: <Register />,
   },
   {
-    path: "/ck3-dna/reset",
+    path: "/#/reset",
     element: <Reset />,
   },
   {
-    path: "/ck3-dna/dashboard",
+    path: "/#/dashboard",
     element: <Dashboard />,
   },
   {
-    path: "/ck3-dna/chara/:charaId",
+    path: "/#/chara/:charaId",
     element: <CharacterPage />,
   },
   {
-    path: "/ck3-dna/upload",
+    path: "/#/upload",
     element: <UploadPage />,
   },
   {
-    path: "/ck3-dna/user/:uid",
+    path: "/#/user/:uid",
     element: <UserPage />,
   },
 ]);
