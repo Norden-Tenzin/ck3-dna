@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import {url} from "../utils/helper";
 // style
 import {
   auth,
@@ -15,7 +16,7 @@ function Login() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("LOGIN PAGE")
+    console.log("LOGIN PAGE");
     if (loading) {
       // maybe trigger a loading screen
       return;
@@ -26,7 +27,7 @@ function Login() {
     <div
       style={{
         height: "100vh",
-        backgroundImage: `url("/images/background.png")`,
+        backgroundImage: `url("${process.env.PUBLIC_URL}/images/background.png")`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}

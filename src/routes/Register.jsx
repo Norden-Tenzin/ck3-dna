@@ -28,7 +28,7 @@ function Register() {
     <div
       style={{
         height: "100vh",
-        backgroundImage: `url("/images/background.png")`,
+        backgroundImage: `url("${process.env.PUBLIC_URL}/images/background.png")`,
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
       }}

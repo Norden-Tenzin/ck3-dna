@@ -1,6 +1,5 @@
 export const limit_number = 12;
-export const dna = 
-`
+export const dna = `
 ruler_designer_542719970={
 	type=female
 	id=0
@@ -152,4 +151,4 @@ ruler_designer_542719970={
 		}
 	}
 	entity={ 0 0 }
-}`
+}`;

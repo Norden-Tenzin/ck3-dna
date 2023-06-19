@@ -5,17 +5,19 @@
   .scroll {
     overflow: hidden;
     margin: 0px;
-  }
-  .end {
-    margin-top: 20px;
-    grid-column: 2/4;
-    text-align: center;
-  }
-  .card_grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
-    user-select: none;
+    display: flex;
+    flex-direction: column;
+    .card_grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+      user-select: none;
+    }
+    .end {
+      margin-top: 20px;
+      grid-column: 2/4;
+      text-align: center;
+    }
   }
 
   .loading_card_grid {

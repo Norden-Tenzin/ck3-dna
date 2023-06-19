@@ -121,7 +121,7 @@ export default function CardPage(props) {
   return (
     <div className="card_page">
       <div className="scroll">
-        <div>
+        {/* <div> */}
           <div className="card_grid">
             {loaded
               ? cardData.map((card, index) => (
@@ -149,7 +149,7 @@ export default function CardPage(props) {
             </button>
           )}
           {!areMore && <p className="end">END</p>}
-        </div>
+        {/* </div> */}
       </div>
     </div>
   );

@@ -7,7 +7,7 @@ import "./index.css";
 import Login from "./routes/Login";
 import Register from "./routes/Register";
 import Reset from "./routes/Reset";
-import Dashboard from "./routes/Dashboard";
+// import Dashboard from "./routes/Dashboard";
 import LaunchPage from "./routes/LaunchPage";
 import CharacterPage from "./routes/CharacterPage";
 import UploadPage from "./routes/UploadPage";
@@ -30,10 +30,10 @@ const router = createBrowserRouter([
     path: "/ck3-dna/reset",
     element: <Reset />,
   },
-  {
-    path: "/ck3-dna/dashboard",
-    element: <Dashboard />,
-  },
+  // {
+  //   path: "/ck3-dna/dashboard",
+  //   element: <Dashboard />,
+  // },
   {
     path: "/ck3-dna/chara/:charaId",
     element: <CharacterPage />,

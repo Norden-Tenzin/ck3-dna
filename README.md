@@ -1,3 +1,6 @@
+Try Here: 
+https://norden-tenzin.github.io/ck3-dna/
+
 # TODO
 - add validators and responses to login and register page
 - add better form responses to login register and uploadpage
