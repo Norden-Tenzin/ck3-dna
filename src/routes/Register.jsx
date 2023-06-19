@@ -22,7 +22,7 @@ function Register() {
   useEffect(() => {
     console.log("REGISTER PAGE")
     if (loading) return;
-    if (user) navigate("/#/dashboard", { replace: true });
+    if (user) navigate("/ck3-dna/dashboard", { replace: true });
   }, [user, loading]);
   return (
     <div
@@ -73,7 +73,7 @@ function Register() {
               Register
             </button>
             <div>
-              Already have an account? <Link to="/#/">Login</Link> now.
+              Already have an account? <Link to="/ck3-dna/">Login</Link> now.
             </div>
           </div>
         </div>

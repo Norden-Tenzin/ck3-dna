@@ -69,7 +69,7 @@ export default function CustomCard(props) {
             src={props.data["displayImage"]}
             className="card_image"
             onClick={() => {
-              navigate(`/#/chara/${props.data.pid}`);
+              navigate(`/ck3-dna/chara/${props.data.pid}`);
             }}
           />
           <Tags className="tag_holder card_icon" mods={props.data["modList"]} />

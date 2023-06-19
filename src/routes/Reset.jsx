@@ -13,7 +13,7 @@ function Reset() {
   useEffect(() => {
     console.log("RESET PAGE")
     if (loading) return;
-    if (user) navigate("/#/dashboard");
+    if (user) navigate("/ck3-dna/dashboard");
   }, [user, loading]);
   return (
     <div className="reset">
@@ -32,7 +32,7 @@ function Reset() {
           Send password reset email
         </button>
         <div>
-          Don't have an account? <Link to="/#/register">Register</Link> now.
+          Don't have an account? <Link to="/ck3-dna/register">Register</Link> now.
         </div>
       </div>
     </div>
