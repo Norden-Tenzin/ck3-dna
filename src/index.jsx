@@ -50,6 +50,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   // <React.StrictMode>
-    <RouterProvider router={router} />
+    <RouterProvider router={router} basename={process.env.PUBLIC_URL}/>
   // </React.StrictMode>
 );
+
+// <BrowserRouter >
+//   <Link to="/awesome-post">
+// </BrowserRouter>
