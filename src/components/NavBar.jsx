@@ -144,7 +144,7 @@ export default function NavBar() {
       <div className="dd-list">
         <DropdownItem
           onClick={() => {
-            console.log("HOME");
+            // console.log("HOME");
             navigate(`/user/${userId}`);
           }}
         >

@@ -20,6 +20,7 @@ function Register() {
     registerWithEmailAndPassword(name, email, password);
   };
   useEffect(() => {
+    console.log("REGISTER PAGE")
     if (loading) return;
     if (user) navigate("/dashboard", { replace: true });
   }, [user, loading]);

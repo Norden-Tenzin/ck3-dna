@@ -23,7 +23,6 @@ import "swiper/css/thumbs";
 import "../style/CharaPage.scss";
 // internal
 import Tags from "../components/Tags";
-import { dna } from "../utils/helper";
 import { auth, db, logout, storage } from "../utils/firebase";
 import NavBar from "../components/NavBar";
 import Modal from "../components/Modal";
@@ -32,15 +31,16 @@ export default function CharacterPage(props) {
   // const [user, loading, error] = useAuthState(auth);
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
   const [authorName, setAuthorName] = useState("");
-  const [loaded, setIsLoaded] = React.useState(false);
-  const [data, setData] = React.useState([]);
-  const [copiedTimer, setCopiedTimer] = React.useState(0);
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [loaded, setIsLoaded] = useState(false);
+  const [data, setData] = useState([]);
+  const [copiedTimer, setCopiedTimer] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
   const params = useParams();
   const charaId = params.charaId;
 
   useEffect(() => {
+    console.log("CHARACTER PAGE")
     getData().then((data) => {
       getAuthorName(data);
     });
@@ -105,7 +105,7 @@ export default function CharacterPage(props) {
     <div className="page_container">
       <div className="page">
         <NavBar />
-        {isOpen && <Modal setIsOpen={setIsOpen} data={data} />}
+        {isOpen && <Modal setIsOpen={setIsOpen} data={data} type="textView"/>}
         <div className="page_items">
           <SwiperJSX
             loop={true}

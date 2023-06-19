@@ -17,7 +17,7 @@ import {
 import "../style/LaunchPage.scss";
 // internal
 import { auth, db, logout } from "../utils/firebase";
-import { Dropdown } from "../components/Dropdown";
+import { Dropdown, DropdownItem} from "../components/Dropdown";
 import NavBar from "../components/NavBar";
 import { limit_number } from "../utils/helper";
 
@@ -115,7 +115,6 @@ export default function UserPage() {
   };
 
   const search = () => {
-    // TODO set filters and refresh page
     let queryLst = [];
     if (sexMale === true) {
       queryLst.push(where("sex", "==", "male"));
@@ -143,6 +142,7 @@ export default function UserPage() {
 
   useEffect(() => {
     if (loading) return;
+    console.log("LOADING PAGE")
   }, [loading]);
 
   useEffect(() => {
@@ -271,11 +271,10 @@ export default function UserPage() {
             <div className="page_cards">
               <CardPage
                 className="card-page"
-                fieldName="modList"
-                condition="array-contains-any"
-                expression={["epe", "cfp"]}
-                myQuery={myQuery}
                 myWhere={myWhere}
+                // type="default"
+                dropdown={true}
+                dropdownType = "launch"
               />
             </div>
           </div>
@@ -283,8 +282,4 @@ export default function UserPage() {
       </div>
     </div>
   );
-
-  function DropdownItem(props) {
-    return <div onClick={props.onClick}>{props.children}</div>;
-  }
 }

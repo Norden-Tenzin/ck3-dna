@@ -38,7 +38,7 @@
       transform: translateY(0);
     }
     .navbar_button:active {
-      transform: translateY(2px);
+      transform: translateY(0.5px);
       transition-duration: 0.35s;
     }
     .navbar_account_icon_container {
@@ -88,7 +88,7 @@
       transition-duration: 0.35s;
     }
     .navbar_pill:active {
-      // transform: translateY(2px);
+      // transform: translateY(0.5px);
       transition-duration: 0.35s;
     }
 

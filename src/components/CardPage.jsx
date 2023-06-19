@@ -22,10 +22,11 @@ export default function CardPage(props) {
   const [lastVisible, setLastVisible] = React.useState("");
   const [areMore, setAreMore] = React.useState(true);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isDeleting, setIsDeleting] = React.useState(false);
 
   useEffect(() => {
     getData();
-  }, [props.myQuery, props.myWhere]);
+  }, [props.myWhere]);
 
   const getData = async () => {
     setIsLoading(true);
@@ -41,7 +42,11 @@ export default function CardPage(props) {
       );
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        res.push(doc.data());
+        // res.push(doc.data());
+        res.push({
+          id: doc.id,
+          data: doc.data(),
+        });
       });
       setAreMore(querySnapshot.docs.length < limit_number ? false : true);
       if (querySnapshot.docs.length >= limit_number === true) {
@@ -77,7 +82,11 @@ export default function CardPage(props) {
       );
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        res.push(doc.data());
+        // res.push(doc.data());
+        res.push({
+          id: doc.id,
+          data: doc.data(),
+        });
       });
       setAreMore(querySnapshot.docs.length < limit_number ? false : true);
       if (querySnapshot.docs.length >= limit_number === true) {
@@ -104,38 +113,42 @@ export default function CardPage(props) {
     </div>
   );
 
+  const deleteCard = (id) => {
+    let res = cardData.filter((card) => card.id !== id);
+    setCardData(res);
+  };
+
   return (
     <div className="card_page">
       <div className="scroll">
         <div>
           <div className="card_grid">
             {loaded
-              ? cardData.map((data, index) => (
-                  <CustomCard data={data} key={index} />
+              ? cardData.map((card, index) => (
+                  <CustomCard
+                    key={index}
+                    id={card.id}
+                    data={card.data}
+                    dropdown={props.dropdown}
+                    dropdownType={props.dropdownType}
+                    deleteCard={deleteCard}
+                  />
                 ))
               : [...Array(limit_number)].map((_, index) => (
                   <CustomCard key={index} isSkeleton={true} />
                 ))}
-            {areMore && cardData.length !== 0 && (
-              <button
-                className="end"
-                onClick={() => {
-                  loadMoreData();
-                }}
-              >
-                Show More
-              </button>
-            )}
-            {!areMore && <p className="end">END</p>}
           </div>
-          {/* {cardData.length === 0 && (
-            <di className="loading_card_grid">
-              <CustomCard isSkeleton={true} />
-              <CustomCard isSkeleton={true} />
-            </di>
-          )} */}
-
-          
+          {areMore && cardData.length !== 0 && (
+            <button
+              className="end"
+              onClick={() => {
+                loadMoreData();
+              }}
+            >
+              Show More
+            </button>
+          )}
+          {!areMore && <p className="end">END</p>}
         </div>
       </div>
     </div>

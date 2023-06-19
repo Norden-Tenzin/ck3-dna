@@ -8,9 +8,6 @@
   }
   .end {
     margin-top: 20px;
-    // position: relative;
-    // left: 48%;
-    // top: 50%;
     grid-column: 2/4;
     text-align: center;
   }
@@ -41,7 +38,6 @@
   border-radius: 5px;
   overflow: hidden;
   object-fit: contain;
-  // box-shadow: 2px 9px 10px 0px rgba(0, 0, 0, 0.19);
   cursor: pointer;
   background-color: #c0ccd3;
   .card_image {

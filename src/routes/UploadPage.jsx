@@ -48,6 +48,7 @@ export default function UploadPage() {
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
+    console.log("UPLOAD PAGE")
     if (loading) return;
     if (!user) return navigate("/");
     if (imageUrls.length > 0) {
@@ -502,6 +503,3 @@ export default function UploadPage() {
   );
 }
 
-// TODO
-// 1 reset submit page once its finished and scroll to top
-// 2

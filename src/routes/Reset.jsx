@@ -11,6 +11,7 @@ function Reset() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
+    console.log("RESET PAGE")
     if (loading) return;
     if (user) navigate("/dashboard");
   }, [user, loading]);

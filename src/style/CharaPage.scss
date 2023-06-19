@@ -110,7 +110,7 @@
             transition-duration: 0.35s;
           }
           .fill:active {
-            transform: translateY(2px);
+            transform: translateY(0.5px);
             transition-duration: 0.35s;
           }
           .border {
@@ -124,7 +124,7 @@
             transition-duration: 0.35s;
           }
           .border:active {
-            transform: translateY(2px);
+            transform: translateY(0.5px);
             transition-duration: 0.35s;
           }
         }

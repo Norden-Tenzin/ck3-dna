@@ -11,7 +11,6 @@ import NavBar from "../components/NavBar";
 
 export default function UserPage() {
   const [user, loading, error] = useAuthState(auth);
-  const [data, setData] = useState(null);
   const [userId, setUserId] = useState("");
   const [userName, setUserName] = useState("");
   const [userDesc, setUserDesc] = useState("");
@@ -21,8 +20,15 @@ export default function UserPage() {
   const uid = params.uid;
 
   useEffect(() => {
+    console.log("USER PAGE");
     fetchUserId();
-    if (data != null) {
+  }, []);
+
+  const fetchUserId = async () => {
+    try {
+      const q = query(collection(db, "users"), where("uid", "==", params?.uid));
+      const doc = await getDocs(q);
+      const data = doc.docs[0].data();
       if (data.id == uid) {
         setIsMyPage(true);
         setUserId(data.id);
@@ -31,15 +37,6 @@ export default function UserPage() {
         setUserId(uid);
         setUserName(data.name);
       }
-    }
-  }, [data]);
-
-  const fetchUserId = async () => {
-    try {
-      const q = query(collection(db, "users"), where("uid", "==", params?.uid));
-      const doc = await getDocs(q);
-      const data = doc.docs[0].data();
-      setData(data);
     } catch (error) {
       console.log(
         "%cerror UserPage.jsx line:21 ",
@@ -61,7 +58,12 @@ export default function UserPage() {
             </div>
             <div className="user_cards">
               {userId !== "" ? (
-                <CardPage fieldName="authorId" condition="==" expression={userId} />
+                <CardPage
+                  fieldName="authorId"
+                  myWhere={[where("authorId", "==", userId)]}
+                  dropdown={true}
+                  dropdownType="user"
+                />
               ) : (
                 ""
               )}
