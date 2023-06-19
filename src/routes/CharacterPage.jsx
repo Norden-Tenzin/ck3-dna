@@ -40,7 +40,7 @@ export default function CharacterPage(props) {
   const charaId = params.charaId;
 
   useEffect(() => {
-    console.log("CHARACTER PAGE")
+    console.log("CHARACTER PAGE");
     getData().then((data) => {
       getAuthorName(data);
     });
@@ -105,7 +105,7 @@ export default function CharacterPage(props) {
     <div className="page_container">
       <div className="page">
         <NavBar />
-        {isOpen && <Modal setIsOpen={setIsOpen} data={data} type="textView"/>}
+        {isOpen && <Modal setIsOpen={setIsOpen} data={data} type="textView" />}
         <div className="page_items">
           <SwiperJSX
             loop={true}
