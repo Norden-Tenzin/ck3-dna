@@ -219,7 +219,7 @@ export default function CharacterPage(props) {
             {authorName != "" ? (
               <a
                 onClick={() => {
-                  navigate(`/user/${data["authorId"]}`);
+                  navigate(`/#/user/${data["authorId"]}`);
                 }}
                 className="chara_auth"
               >

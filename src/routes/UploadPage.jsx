@@ -50,7 +50,7 @@ export default function UploadPage() {
   useEffect(() => {
     console.log("UPLOAD PAGE")
     if (loading) return;
-    if (!user) return navigate("/");
+    if (!user) return navigate("/#/");
     if (imageUrls.length > 0) {
       uploadData(imageUrls);
       setImageUrls([]);

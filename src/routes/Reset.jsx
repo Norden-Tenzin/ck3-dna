@@ -13,7 +13,7 @@ function Reset() {
   useEffect(() => {
     console.log("RESET PAGE")
     if (loading) return;
-    if (user) navigate("/dashboard");
+    if (user) navigate("/#/dashboard");
   }, [user, loading]);
   return (
     <div className="reset">

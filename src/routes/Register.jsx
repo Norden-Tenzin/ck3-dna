@@ -22,7 +22,7 @@ function Register() {
   useEffect(() => {
     console.log("REGISTER PAGE")
     if (loading) return;
-    if (user) navigate("/dashboard", { replace: true });
+    if (user) navigate("/#/dashboard", { replace: true });
   }, [user, loading]);
   return (
     <div

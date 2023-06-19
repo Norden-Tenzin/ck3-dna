@@ -90,7 +90,7 @@ export default function NavBar() {
       <div
         className="logo"
         onClick={() => {
-          navigate("/");
+          navigate("/#/");
         }}
       >
         CK3-DNA
@@ -100,7 +100,7 @@ export default function NavBar() {
           <button
             className="navbar_button"
             onClick={() => {
-              navigate("/login");
+              navigate("/#/login");
             }}
           >
             sign in
@@ -108,7 +108,7 @@ export default function NavBar() {
           <button
             className="navbar_button"
             onClick={() => {
-              navigate("/register");
+              navigate("/#/register");
             }}
           >
             sign up
@@ -119,7 +119,7 @@ export default function NavBar() {
           <div
             className="navbar_account_icon_container"
             onClick={() => {
-              navigate("/upload");
+              navigate("/#/upload");
             }}
           >
             <FiShare className="navbar_account_icon" />
@@ -145,7 +145,7 @@ export default function NavBar() {
         <DropdownItem
           onClick={() => {
             // console.log("HOME");
-            navigate(`/user/${userId}`);
+            navigate(`/#/user/${userId}`);
           }}
         >
           Home
