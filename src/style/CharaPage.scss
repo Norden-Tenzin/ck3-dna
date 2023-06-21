@@ -4,7 +4,7 @@
   // display: flex;
   // justify-content: center;
   background-color: $ck3-color;
-  height: 100vmin;
+  // height: 100vmin;
   .page {
     max-width: 1280px;
     width: 100%;
@@ -15,7 +15,7 @@
       display: grid;
       grid-template-columns: repeat(12, 1fr);
       // grid-template-rows: repeat(2, 60vh);
-      grid-template-rows: 60vh auto;
+      grid-template-rows: 60vh 10rem;
       column-gap: 20px;
       margin-top: 4rem;
       margin: 4rem 40px 0px 40px;

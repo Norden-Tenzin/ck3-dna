@@ -30,10 +30,6 @@ const router = createBrowserRouter([
     path: "/ck3-dna/reset",
     element: <Reset />,
   },
-  // {
-  //   path: "/ck3-dna/dashboard",
-  //   element: <Dashboard />,
-  // },
   {
     path: "/ck3-dna/chara/:charaId",
     element: <CharacterPage />,
@@ -49,7 +45,5 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  // <React.StrictMode>
-    <RouterProvider router={router} />
-  // </React.StrictMode>
+  <RouterProvider router={router} />
 );

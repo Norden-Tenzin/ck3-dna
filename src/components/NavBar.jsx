@@ -66,18 +66,20 @@ export default function NavBar() {
   ];
 
   const fetchUserName = async () => {
-    try {
-      const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-      const doc = await getDocs(q);
-      const data = doc.docs[0].data();
-      setName(data.name);
-      setUserId(data.uid);
-    } catch (error) {
-      console.log(
-        "%cerror Dashboard.jsx line:23 ",
-        "color: red; display: block; width: 100%;",
-        error
-      );
+    if (user) {
+      try {
+        const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+        const doc = await getDocs(q);
+        const data = doc.docs[0].data();
+        setName(data.name);
+        setUserId(data.uid);
+      } catch (error) {
+        console.log(
+          "%cerror Dashboard.jsx line:23 ",
+          "color: red; display: block; width: 100%;",
+          error
+        );
+      }
     }
   };
 
@@ -124,7 +126,7 @@ export default function NavBar() {
           >
             <FiShare className="navbar_account_icon" />
           </div>
-          <Dropdown title={name != "" ? `${name}` : "..."} >
+          <Dropdown title={name != "" ? `${name}` : "..."}>
             <DropdownMenu />
           </Dropdown>
         </div>
@@ -144,7 +146,6 @@ export default function NavBar() {
       <div className="dd-list">
         <DropdownItem
           onClick={() => {
-            // console.log("HOME");
             navigate(`/ck3-dna/user/${userId}`);
           }}
         >

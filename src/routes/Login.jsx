@@ -15,7 +15,6 @@ export default function Login() {
   const [user, loading, error] = useAuthState(auth);
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("LOGIN PAGE");
     if (loading) {
       // maybe trigger a loading screen
       return;

@@ -48,7 +48,6 @@ export default function UploadPage() {
   const [imageUrls, setImageUrls] = useState([]);
 
   useEffect(() => {
-    console.log("UPLOAD PAGE")
     if (loading) return;
     if (!user) return navigate("/ck3-dna/");
     if (imageUrls.length > 0) {
@@ -211,7 +210,7 @@ export default function UploadPage() {
         try {
           const snapshot = await uploadBytesResumable(StorageRef, resizedImage);
           const downloadURL = await getDownloadURL(snapshot.ref);
-          console.log("Image uploaded successfully:", downloadURL);
+          // console.log("Image uploaded successfully:", downloadURL);
           resolve(downloadURL);
         } catch (error) {
           console.log(
@@ -257,7 +256,7 @@ export default function UploadPage() {
 
       try {
         const urls = await Promise.all(imagePromises);
-        console.log("All URLs updated:", urls);
+        // console.log("All URLs updated:", urls);
         setImageUrls(urls);
       } catch (error) {
         console.log(
@@ -269,14 +268,13 @@ export default function UploadPage() {
     };
 
     uploadImages().then(() => {
-      console.log("Submit Done");
+      // console.log("Submit Done");
       setIsLoading(false);
       setPostId(uuid.v4());
     });
   };
 
   const uploadData = async (urls) => {
-    console.log("HERE");
     try {
       addDoc(collection(db, "posts"), {
         authorId: user.uid,

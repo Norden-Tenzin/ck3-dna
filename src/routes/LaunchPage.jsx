@@ -87,32 +87,32 @@ export default function UserPage() {
     }
   };
 
-  const handleScroll = () => {
-    const scrollTop = window.scrollY;
-    const scrollHeight = document.body.scrollHeight;
-    const clientHeight = document.documentElement.clientHeight;
-    console.log(
-      "%cCardPage.jsx line:39 scrollTop",
-      "color: #007acc;",
-      scrollTop
-    );
-    console.log(
-      "%cCardPage.jsx line:40 scrollHeight",
-      "color: #007acc;",
-      scrollHeight
-    );
-    console.log(
-      "%cCardPage.jsx line:41 clientHeight",
-      "color: #007acc;",
-      clientHeight
-    );
-    if (scrollTop + clientHeight >= scrollHeight) {
-      console.log("SCROLLED TO BOTTOM");
-    }
-    // if (!areMore) {
-    //   window.removeEventListener("scroll", handleScroll);
-    // }
-  };
+  // const handleScroll = () => {
+  //   const scrollTop = window.scrollY;
+  //   const scrollHeight = document.body.scrollHeight;
+  //   const clientHeight = document.documentElement.clientHeight;
+  //   console.log(
+  //     "%cCardPage.jsx line:39 scrollTop",
+  //     "color: #007acc;",
+  //     scrollTop
+  //   );
+  //   console.log(
+  //     "%cCardPage.jsx line:40 scrollHeight",
+  //     "color: #007acc;",
+  //     scrollHeight
+  //   );
+  //   console.log(
+  //     "%cCardPage.jsx line:41 clientHeight",
+  //     "color: #007acc;",
+  //     clientHeight
+  //   );
+  //   if (scrollTop + clientHeight >= scrollHeight) {
+  //     console.log("SCROLLED TO BOTTOM");
+  //   }
+  //   // if (!areMore) {
+  //   //   window.removeEventListener("scroll", handleScroll);
+  //   // }
+  // };
 
   const search = () => {
     let queryLst = [];
@@ -142,13 +142,12 @@ export default function UserPage() {
 
   useEffect(() => {
     if (loading) return;
-    console.log("LOADING PAGE")
   }, [loading]);
 
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  // useEffect(() => {
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, []);
 
   return (
     <div className="page_container">

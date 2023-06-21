@@ -20,7 +20,6 @@ function Register() {
     registerWithEmailAndPassword(name, email, password);
   };
   useEffect(() => {
-    console.log("REGISTER PAGE")
     if (loading) return;
     if (user) navigate("/ck3-dna/dashboard", { replace: true });
   }, [user, loading]);

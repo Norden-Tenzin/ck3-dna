@@ -40,7 +40,6 @@ export default function CharacterPage(props) {
   const charaId = params.charaId;
 
   useEffect(() => {
-    console.log("CHARACTER PAGE");
     getData().then((data) => {
       getAuthorName(data);
     });
@@ -101,6 +100,19 @@ export default function CharacterPage(props) {
     }, 1000); // set interval to 1000 milliseconds (1 second)
   };
 
+  function getGridImages() {
+    console.log(data["gridImages"]);
+    if (data["gridImages"] && data["gridImages"].length > 0) {
+      return data["gridImages"].map((url, index) => (
+        <SwiperSlide key={index}>
+          <img src={url} className="my-swiper-image" />
+        </SwiperSlide>
+      ));
+    } else {
+      return "";
+    }
+  }
+
   return (
     <div className="page_container">
       <div className="page">
@@ -131,17 +143,8 @@ export default function CharacterPage(props) {
                 <div className="skeleton_img" />
               </SwiperSlide>
             )}
-            {data["gridImages"] && data["gridImages"].length > 0 ? (
-              data["gridImages"].map((url, index) => (
-                <SwiperSlide key={index}>
-                  <img src={url} className="my-swiper-image" />
-                </SwiperSlide>
-              ))
-            ) : (
-              <SwiperSlide>
-                <div className="skeleton_img" />
-              </SwiperSlide>
-            )}
+            {/* GRID IMAGES */}
+            {getGridImages()}
           </SwiperJSX>
           <SwiperJSX
             // @ts-ignore
@@ -164,17 +167,8 @@ export default function CharacterPage(props) {
                 <div className="skeleton_thumb_img" />
               </SwiperSlide>
             )}
-            {data["gridImages"] && data["gridImages"].length > 0 ? (
-              data["gridImages"].map((url, index) => (
-                <SwiperSlide key={index}>
-                  <img src={url} className="my-swiper-thumb-image" />
-                </SwiperSlide>
-              ))
-            ) : (
-              <SwiperSlide>
-                <div className="skeleton_thumb_img" />
-              </SwiperSlide>
-            )}
+            {/* THUMB GRID IMAGES */}
+            {getGridImages()}
           </SwiperJSX>
           <div className="chara_data">
             {data.length != 0 ? (

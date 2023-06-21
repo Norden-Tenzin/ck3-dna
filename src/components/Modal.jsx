@@ -47,7 +47,9 @@ const Modal = ({ setIsOpen, data, type, deleteFunc }) => {
             <button className="closeBtn" onClick={() => setIsOpen(false)}>
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button>
-            <div className="modalContent">iodwjahdoi</div>
+            <div className="modalContentContainer">
+              <div className="modalContent">{data.dna}</div>
+            </div>
           </div>
         )}
       </div>

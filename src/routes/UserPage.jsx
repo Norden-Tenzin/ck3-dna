@@ -20,7 +20,6 @@ export default function UserPage() {
   const uid = params.uid;
 
   useEffect(() => {
-    console.log("USER PAGE");
     fetchUserId();
   }, []);
 
