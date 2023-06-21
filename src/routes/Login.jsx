@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {url} from "../utils/helper";
 // style
 import {
   auth,
@@ -10,7 +9,7 @@ import {
 } from "../utils/firebase";
 import "../style/Login.scss";
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
@@ -68,10 +67,10 @@ function Login() {
               Login
             </button>
             <div>
-              <Link to="/reset">Forgot Password</Link>
+              <Link to="/ck3-dna/reset">Forgot Password</Link>
             </div>
             <div>
-              Don't have an account? <Link to="/register">Register</Link> now.
+              Don't have an account? <Link to="/ck3-dna/register">Register</Link> now.
             </div>
           </div>
         </div>
@@ -79,4 +78,3 @@ function Login() {
     </div>
   );
 }
-export default Login;

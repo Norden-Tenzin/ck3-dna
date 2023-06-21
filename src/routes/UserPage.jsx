@@ -63,6 +63,7 @@ export default function UserPage() {
                   myWhere={[where("authorId", "==", userId)]}
                   dropdown={true}
                   dropdownType="user"
+                  at={user}
                 />
               ) : (
                 ""

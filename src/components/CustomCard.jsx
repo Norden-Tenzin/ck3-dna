@@ -20,12 +20,16 @@ export default function CustomCard(props) {
   const [copiedTimer, setCopiedTimer] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // useEffect(()=>{
+  //   console.log(`user: ${props.at}`)
+  //   console.log(props.at.uid)
+
+  //   console.log(props.data.authorId)
+  // }, [])
+
   const deleteCard = async () => {
     try {
-      console.log(`HEREOIJOIAJD: ${id}`);
-      console.log("Document ID:", id);
       const docRef = doc(db, "posts", id);
-      console.log("docRef path:", docRef.path);
       await deleteDoc(docRef);
       props.deleteCard(id);
     } catch (error) {
@@ -80,24 +84,26 @@ export default function CustomCard(props) {
               ref={dropdownRef}
             >
               <div className="dd-list">
-                {props.dropdownType === "user" && (
-                  <DropdownItem>
-                    {
-                      <div
-                        className="dd-list-item-container"
-                        onClick={() => {
-                          setIsModalOpen(true);
-                          dropdownRef.current.toggleList();
-                        }}
-                      >
-                        <div className="dd-list-item-text delete">delete</div>
-                      </div>
-                    }
-                  </DropdownItem>
-                )}
-                {props.dropdownType === "user" && (
-                  <div className="divider"></div>
-                )}
+                {props.dropdownType === "user" &&
+                  props.at.uid === props.data.authorId && (
+                    <DropdownItem>
+                      {
+                        <div
+                          className="dd-list-item-container"
+                          onClick={() => {
+                            setIsModalOpen(true);
+                            dropdownRef.current.toggleList();
+                          }}
+                        >
+                          <div className="dd-list-item-text delete">delete</div>
+                        </div>
+                      }
+                    </DropdownItem>
+                  )}
+                {props.dropdownType === "user" &&
+                  props.at.uid === props.data.authorId && (
+                    <div className="divider"></div>
+                  )}
                 <DropdownItem>
                   {
                     <div className="dd-list-item-container" onClick={copyLink}>

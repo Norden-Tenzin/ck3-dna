@@ -73,7 +73,7 @@ function Register() {
               Register
             </button>
             <div>
-              Already have an account? <Link to="/ck3-dna/">Login</Link> now.
+              Already have an account? <Link to="/ck3-dna/login">Login</Link> now.
             </div>
           </div>
         </div>

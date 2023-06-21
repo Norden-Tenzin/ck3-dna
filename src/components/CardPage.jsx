@@ -132,6 +132,7 @@ export default function CardPage(props) {
                     dropdown={props.dropdown}
                     dropdownType={props.dropdownType}
                     deleteCard={deleteCard}
+                    at={props.at}
                   />
                 ))
               : [...Array(limit_number)].map((_, index) => (
