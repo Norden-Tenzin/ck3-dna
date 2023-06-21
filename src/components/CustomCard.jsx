@@ -6,7 +6,6 @@ import { GiFemale, GiMale } from "react-icons/gi";
 import { SlArrowUp, SlArrowDown } from "react-icons/sl";
 import { BsThreeDots } from "react-icons/bs";
 import { doc, deleteDoc } from "firebase/firestore";
-
 // internal
 import { db } from "../utils/firebase";
 import Tags from "../components/Tags";
@@ -19,13 +18,6 @@ export default function CustomCard(props) {
   const navigate = useNavigate();
   const [copiedTimer, setCopiedTimer] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // useEffect(()=>{
-  //   console.log(`user: ${props.at}`)
-  //   console.log(props.at.uid)
-
-  //   console.log(props.data.authorId)
-  // }, [])
 
   const deleteCard = async () => {
     try {
@@ -83,49 +75,78 @@ export default function CustomCard(props) {
               className="dd-wrapper-card"
               ref={dropdownRef}
             >
-              <div className="dd-list">
-                {props.dropdownType === "user" &&
-                  props.at.uid === props.data.authorId && (
-                    <DropdownItem>
-                      {
-                        <div
-                          className="dd-list-item-container"
-                          onClick={() => {
-                            setIsModalOpen(true);
-                            dropdownRef.current.toggleList();
-                          }}
-                        >
-                          <div className="dd-list-item-text delete">delete</div>
-                        </div>
-                      }
-                    </DropdownItem>
-                  )}
-                {props.dropdownType === "user" &&
-                  props.at.uid === props.data.authorId && (
-                    <div className="divider"></div>
-                  )}
-                <DropdownItem>
-                  {
-                    <div className="dd-list-item-container" onClick={copyLink}>
-                      <div className="dd-list-item-text">
-                        {copiedTimer > 0 ? "copied" : "copy link"}
+              {props.dropdownType === "user" &&
+              props.at.uid === props.data.authorId ? (
+                <div className="dd-list">
+                  <DropdownItem>
+                    {
+                      <div
+                        className="dd-list-item-container"
+                        onClick={() => {
+                          setIsModalOpen(true);
+                          dropdownRef.current.toggleList();
+                        }}
+                      >
+                        <div className="dd-list-item-text delete">delete</div>
                       </div>
-                    </div>
-                  }
-                </DropdownItem>
-                <DropdownItem>
-                  {
-                    <div
-                      className="dd-list-item-container"
-                      onClick={() => {
-                        dropdownRef.current.toggleList();
-                      }}
-                    >
-                      <div className="dd-list-item-text">cancel</div>
-                    </div>
-                  }
-                </DropdownItem>
-              </div>
+                    }
+                  </DropdownItem>
+
+                  <div className="divider"></div>
+                  <DropdownItem>
+                    {
+                      <div
+                        className="dd-list-item-container"
+                        onClick={copyLink}
+                      >
+                        <div className="dd-list-item-text">
+                          {copiedTimer > 0 ? "copied" : "copy link"}
+                        </div>
+                      </div>
+                    }
+                  </DropdownItem>
+                  <DropdownItem>
+                    {
+                      <div
+                        className="dd-list-item-container"
+                        onClick={() => {
+                          dropdownRef.current.toggleList();
+                        }}
+                      >
+                        <div className="dd-list-item-text">cancel</div>
+                      </div>
+                    }
+                  </DropdownItem>
+                </div>
+              ) : (
+                <div className="dd-list">
+                  <DropdownItem>
+                    {
+                      <div
+                        className="dd-list-item-container"
+                        onClick={copyLink}
+                      >
+                        <div className="dd-list-item-text">
+                          {copiedTimer > 0 ? "copied" : "copy link"}
+                        </div>
+                      </div>
+                    }
+                  </DropdownItem>
+                  <div className="divider"></div>
+                  <DropdownItem>
+                    {
+                      <div
+                        className="dd-list-item-container"
+                        onClick={() => {
+                          dropdownRef.current.toggleList();
+                        }}
+                      >
+                        <div className="dd-list-item-text">cancel</div>
+                      </div>
+                    }
+                  </DropdownItem>
+                </div>
+              )}
             </Dropdown>
           )}
         </div>
