@@ -69,19 +69,24 @@ const Dropdown = forwardRef((props, ref) => {
   };
 
   useEffect(() => {
-    const handleOutsideClick = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropOpen(false);
+    if (!props.showArrow) {
+      const handleOutsideClick = (event) => {
+        if (
+          dropdownRef.current &&
+          !dropdownRef.current.contains(event.target)
+        ) {
+          setIsDropOpen(false);
+        }
+      };
+
+      if (isDropOpen) {
+        document.addEventListener("mousedown", handleOutsideClick);
       }
-    };
 
-    if (isDropOpen) {
-      document.addEventListener("mousedown", handleOutsideClick);
+      return () => {
+        document.removeEventListener("mousedown", handleOutsideClick);
+      };
     }
-
-    return () => {
-      document.removeEventListener("mousedown", handleOutsideClick);
-    };
   }, [isDropOpen]);
 
   return (
@@ -90,7 +95,7 @@ const Dropdown = forwardRef((props, ref) => {
         <div className="dd-button-text">{props.title}</div>
         {props.showArrow && renderArrow()}
       </div>
-      {props.showArrow && !isDropOpen && props.children}
+      {props.showArrow && isDropOpen && props.children}
       {!props.showArrow && isDropOpen && props.children}
     </div>
   );
@@ -100,5 +105,3 @@ const DropdownItem = (props) => {
 };
 
 export { Dropdown, DropdownItem };
-
-
