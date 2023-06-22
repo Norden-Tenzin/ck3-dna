@@ -6,8 +6,8 @@
   background-color: $ck3-color;
   .page {
     max-width: 1280px;
+    min-height: 100%;
     width: 100%;
-    min-height: 100dvh;
     overflow: overlay;
     background-color: white;
     .page_grid_container {
@@ -32,6 +32,7 @@
         }
         .user_cards {
           grid-column: 5/13;
+          height: fit-content;
         }
         @media screen and (max-width: 700px) {
           .user_data {

@@ -17,7 +17,7 @@
       user-select: none;
     }
     .end {
-      margin-top: 20px;
+      margin-top: 1rem;
       grid-column: 2/4;
       text-align: center;
     }
@@ -66,10 +66,12 @@
     object-fit: cover;
     transition: all 0.3s ease-in-out;
   }
-  .card_image:hover {
-    width: 115%;
-    height: 115%;
-    position: absolute;
-    margin: -7%;
+  @media (hover: hover) {
+    .card_image:hover {
+      width: 115%;
+      height: 115%;
+      position: absolute;
+      margin: -7%;
+    }
   }
 }

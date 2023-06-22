@@ -12,12 +12,9 @@ body {
     max-width: 1280px;
     min-height: 100%;
     width: 100%;
-    // overflow: overlay;
     background-color: white;
-    height: fit-content;
     .page_grid_container {
       padding-bottom: 4rem;
-      height: fit-content;
       // navbar here
       .page_grid {
         display: grid;
@@ -49,6 +46,7 @@ body {
         }
         .page_cards {
           grid-column: 5/13;
+          height: fit-content;
         }
         @media screen and (max-width: 700px) {
           .page_data {

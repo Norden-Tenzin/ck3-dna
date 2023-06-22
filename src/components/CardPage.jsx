@@ -121,36 +121,34 @@ export default function CardPage(props) {
   return (
     <div className="card_page">
       <div className="scroll">
-        {/* <div> */}
-          <div className="card_grid">
-            {loaded
-              ? cardData.map((card, index) => (
-                  <CustomCard
-                    key={index}
-                    id={card.id}
-                    data={card.data}
-                    dropdown={props.dropdown}
-                    dropdownType={props.dropdownType}
-                    deleteCard={deleteCard}
-                    at={props.at}
-                  />
-                ))
-              : [...Array(limit_number)].map((_, index) => (
-                  <CustomCard key={index} isSkeleton={true} />
-                ))}
-          </div>
-          {areMore && cardData.length !== 0 && (
-            <button
-              className="end"
-              onClick={() => {
-                loadMoreData();
-              }}
-            >
-              Show More
-            </button>
-          )}
-          {!areMore && <p className="end">END</p>}
-        {/* </div> */}
+        <div className="card_grid">
+          {loaded
+            ? cardData.map((card, index) => (
+                <CustomCard
+                  key={index}
+                  id={card.id}
+                  data={card.data}
+                  dropdown={props.dropdown}
+                  dropdownType={props.dropdownType}
+                  deleteCard={deleteCard}
+                  at={props.at}
+                />
+              ))
+            : [...Array(limit_number)].map((_, index) => (
+                <CustomCard key={index} isSkeleton={true} />
+              ))}
+        </div>
+        {areMore && cardData.length !== 0 && (
+          <button
+            className="end"
+            onClick={() => {
+              loadMoreData();
+            }}
+          >
+            Show More
+          </button>
+        )}
+        {!areMore && <p className="end">END</p>}
       </div>
     </div>
   );
