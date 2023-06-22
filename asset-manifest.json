@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/ck3-dna/static/css/main.43e4a334.css",
-    "main.js": "/ck3-dna/static/js/main.a2b38edf.js",
+    "main.css": "/ck3-dna/static/css/main.926549e6.css",
+    "main.js": "/ck3-dna/static/js/main.ff186235.js",
     "static/media/Hack-BoldItalic.ttf": "/ck3-dna/static/media/Hack-BoldItalic.8554b9870248ca379131.ttf",
     "static/media/Hack-Bold.ttf": "/ck3-dna/static/media/Hack-Bold.d34bf8455d60ea80189e.ttf",
     "static/media/Hack-Italic.ttf": "/ck3-dna/static/media/Hack-Italic.72f5c8c87e4dcb96ac8f.ttf",
     "static/media/Hack-Regular.ttf": "/ck3-dna/static/media/Hack-Regular.f2412cb7f3af2d1a6db0.ttf",
     "index.html": "/ck3-dna/index.html",
-    "main.43e4a334.css.map": "/ck3-dna/static/css/main.43e4a334.css.map",
-    "main.a2b38edf.js.map": "/ck3-dna/static/js/main.a2b38edf.js.map"
+    "main.926549e6.css.map": "/ck3-dna/static/css/main.926549e6.css.map",
+    "main.ff186235.js.map": "/ck3-dna/static/js/main.ff186235.js.map"
   },
   "entrypoints": [
-    "static/css/main.43e4a334.css",
-    "static/js/main.a2b38edf.js"
+    "static/css/main.926549e6.css",
+    "static/js/main.ff186235.js"
   ]
 }
