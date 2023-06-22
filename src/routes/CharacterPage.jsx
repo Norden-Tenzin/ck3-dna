@@ -100,16 +100,28 @@ export default function CharacterPage(props) {
     }, 1000); // set interval to 1000 milliseconds (1 second)
   };
 
-  function getGridImages() {
+  function getGridImages(className) {
     console.log(data["gridImages"]);
     if (data["gridImages"] && data["gridImages"].length > 0) {
       return data["gridImages"].map((url, index) => (
         <SwiperSlide key={index}>
-          <img src={url} className="my-swiper-image" />
+          <img src={url} className={className} />
         </SwiperSlide>
       ));
     } else {
       return "";
+      // let lst = [];
+      // for (let i = 0; i < 3; i++) {
+      //   lst.push(
+      //     // <SwiperSlide key={i}>
+      //     //   <img src={data["displayImage"]} className={className} />
+      //     // </SwiperSlide>
+      //     <SwiperSlide>
+      //     <div className="skeleton_thumb_img" />
+      //   </SwiperSlide>
+      //   );
+      // }
+      // return lst;
     }
   }
 
@@ -144,7 +156,7 @@ export default function CharacterPage(props) {
               </SwiperSlide>
             )}
             {/* GRID IMAGES */}
-            {getGridImages()}
+            {getGridImages("my-swiper-image")}
           </SwiperJSX>
           <SwiperJSX
             // @ts-ignore
@@ -168,7 +180,7 @@ export default function CharacterPage(props) {
               </SwiperSlide>
             )}
             {/* THUMB GRID IMAGES */}
-            {getGridImages()}
+            {getGridImages("my-swiper-thumb-image")}
           </SwiperJSX>
           <div className="chara_data">
             {data.length != 0 ? (
