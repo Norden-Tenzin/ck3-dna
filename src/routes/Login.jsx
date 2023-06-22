@@ -16,7 +16,6 @@ export default function Login() {
   const navigate = useNavigate();
   useEffect(() => {
     if (loading) {
-      // maybe trigger a loading screen
       return;
     }
     if (user) navigate("/ck3-dna/");
@@ -69,7 +68,8 @@ export default function Login() {
               <Link to="/ck3-dna/reset">Forgot Password</Link>
             </div>
             <div>
-              Don't have an account? <Link to="/ck3-dna/register">Register</Link> now.
+              Don't have an account?{" "}
+              <Link to="/ck3-dna/register">Register</Link> now.
             </div>
           </div>
         </div>

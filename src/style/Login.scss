@@ -6,7 +6,6 @@ html {
   display: flex;
   justify-content: flex-end;
   .login-space {
-    border-radius: 1rem 0 0 1rem;
     align-self: stretch;
     width: 50rem;
     background-color: white;
@@ -84,7 +83,6 @@ html {
   .login-page {
     .login-space {
       width: 100%;
-      border-radius: 0;
       .login-container {
         width: 70%;
       }

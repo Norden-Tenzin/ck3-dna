@@ -6,7 +6,6 @@ html {
   display: flex;
   justify-content: flex-end;
   .register-space {
-    border-radius: 1rem 0 0 1rem;
     align-self: stretch;
     width: 50rem;
     background-color: white;
@@ -84,7 +83,6 @@ html {
   .register-page {
     .register-space {
       width: 100%;
-      border-radius: 0;
       .register-container {
         width: 70%;
       }
