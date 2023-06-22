@@ -35,7 +35,7 @@ export default function CustomCard(props) {
 
   const copyLink = async () => {
     await navigator.clipboard.writeText(
-      `http://localhost:3000/chara/${props.data.pid}`
+      `http://localhost:3000/ck3-dna/chara/${props.data.pid}`
     );
     var ticks = 1; // set initial ticks
     setCopiedTimer(ticks);
