@@ -33,6 +33,16 @@
         .user_cards {
           grid-column: 5/13;
         }
+        @media screen and (max-width: 700px) {
+          .user_data {
+            grid-column: 1/13;
+          }
+        }
+        @media screen and (max-width: 700px) {
+          .user_cards {
+            grid-column: 1/13;
+          }
+        }
       }
     }
   }
